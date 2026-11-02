@@ -1,0 +1,86 @@
+---
+title: Fusions of generalized polygon association schemes
+summary: A classification of the fusion schemes of the point–distance schemes of generalized hexagons and octagons, with an exact proof from the intersection array.
+question: For which orders (s, t) does the point–distance scheme of a generalized hexagon or octagon admit a proper fusion — and what is it?
+field: Algebraic combinatorics
+status: Draft manuscript
+period: 2026–
+date: 2026-10-28
+order: 1
+---
+
+## Question
+
+The distance relations of a distance-regular graph form an association scheme. A *fusion* merges
+some of those relations so that the merged set is still closed under multiplication, giving a
+smaller scheme — and, when only two classes remain, a strongly regular graph. The question is when
+the point graph of a generalized $2d$-gon of order $(s,t)$ admits a proper fusion, for the hexagon
+($d=3$) and octagon ($d=4$) cases.
+
+<Figure n={1} caption="The generalized quadrangle of order 2 (the doily), the smallest thick generalized 4-gon. A point walks the geometry in red; hover a point to light its three lines.">
+  <Doily id="gps-doily" />
+</Figure>
+
+## Motivation
+
+Generalized polygons are among the most rigid objects in finite geometry, and the Tits group
+${}^2F_4(2)'$ acts on the Ree–Tits octagon of order $(2,4)$ with five orbitals on $1755$ points.
+Asking which unions of those orbitals form a scheme — in particular, whether any strongly regular
+graph is a union of orbitals — leads directly to the general fusion question for the whole family of
+intersection arrays.
+
+## Methods
+
+The argument works from the intersection array alone, so it applies to every distance-regular graph
+with the array of a generalized polygon, not only to polygons that exist. A fusion criterion in terms
+of the eigenmatrix $P$ reduces closure to the vanishing of differences of eigenvalue sums; a sign
+analysis of those differences, together with divisibility arguments for integer $s,t\ge 2$, decides
+every case. The result is backed by two independent exact computations: a direct closure test of every
+proper partition for all $841$ integer pairs $2\le s,t\le 30$, and a certificate that writes the
+closure conditions as polynomial equations in $\mathbb{Q}[s,t]$, reduces them with a lexicographic
+Gröbner basis over $\mathbb{Q}$, and isolates the real solutions exactly.
+
+## Result
+
+<Theorem n={1} name="fusions of generalized hexagons and octagons">
+Let $d\in\{3,4\}$ and let $\Gamma$ be a distance-regular graph with the intersection array of a
+generalized $2d$-gon of order $(s,t)$, where $s,t\ge 2$ are integers. The distance scheme
+$\{A_0,\dots,A_d\}$ has a proper fusion scheme if and only if $s=t$. In that case the fusion is
+unique, namely $\{A_0,\ A_1+\dots+A_{d-1},\ A_d\}$, and it is strongly regular.
+</Theorem>
+
+For hexagons with $s=t=q$ the fusion has the parameters of the collinearity graph of $Q(6,q)$:
+$$
+\begin{gathered}\Bigl(\tfrac{q^6-1}{q-1},\ q(q+1)(q^2+1),\\
+q^3+q^2+q-1,\ (q+1)(q^2+1)\Bigr).\end{gathered}
+$$
+For octagons, the Feit–Higman theorem requires $2st$ to be a perfect square, so $s=t$ never occurs
+for a thick generalized octagon. Every thick finite generalized octagon therefore has a point scheme
+with no proper fusion; in particular no strongly regular graph is a union of orbitals of the Tits
+group on $1755$ points. The full statement and proof are in [§4, Note 1](/mathematics/fusion-theorem).
+
+## Limitations
+
+The manuscript is a draft. The hexagon case with $s=t$ is the
+familiar embedding of the split Cayley hexagon $H(q)$ in $Q(6,q)$; the octagon case reduces, by the
+corollary above, to Feit–Higman. A literature search did not find Theorem 1 stated in Brouwer–Cohen–Neumaier
+or Crnković–Rukavina–Švob and the papers citing it, but the search was not exhaustive and the result
+may be known to specialists. The hypothesis $s,t\ge 2$ is necessary: thin octagon schemes of orders
+$(1,2)$, $(1,8)$ and $(2,1)$ do admit fusions. Uniqueness of the octagon $\mathrm{GO}(2,4)$ is not
+addressed.
+
+## Status
+
+Proved, in a draft manuscript dated 28 October 2026 (*Fusions of the point–distance schemes of
+generalized hexagons and octagons, and the orbital algebra of the Tits group on 1755 points*). The
+companion investigation of other actions of the Tits group is a separate, ongoing project:
+[Orbital configurations of the Tits group](/research/tits-group-orbital-configurations).
+
+<References>
+1. A. E. Brouwer, A. M. Cohen and A. Neumaier, *Distance-Regular Graphs* (Springer, 1989), doi:10.1007/978-3-642-74341-2.
+2. E. Bannai and T. Ito, *Algebraic Combinatorics I: Association Schemes* (Benjamin/Cummings, 1984).
+3. W. Feit and G. Higman, “The nonexistence of certain generalized polygons,” *J. Algebra* 1 (1964): 114–131.
+4. D. Crnković, S. Rukavina and A. Švob, “On some distance-regular graphs with many vertices,” *J. Algebraic Combin.* 51 (2020): 641–652, doi:10.1007/s10801-019-00888-5.
+5. H. Van Maldeghem, *Generalized Polygons* (Birkhäuser, 1998).
+6. J. Tits, “Moufang octagons and the Ree groups of type ²F₄,” *Amer. J. Math.* 105 (1983): 539–594, doi:10.2307/2374268.
+</References>

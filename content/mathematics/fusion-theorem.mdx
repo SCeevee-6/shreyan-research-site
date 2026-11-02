@@ -1,0 +1,249 @@
+---
+n: 1
+title: Fusions of generalized hexagons and octagons
+summary: The point–distance scheme of a generalized hexagon or octagon of order (s, t), with s, t ≥ 2, has a proper fusion exactly when s = t — and then only one. For octagons Feit–Higman rules that case out, so no thick octagon has a fusion. The hexagon proof is given in full.
+statement: '\{A_0,\dots,A_d\}\ \text{has a proper fusion} \iff s=t'
+topics: [Association schemes, Generalized polygons]
+status: Proved (draft manuscript)
+---
+
+This note follows the draft manuscript *Fusions of the point–distance schemes of generalized hexagons
+and octagons, and the orbital algebra of the Tits group on 1755 points*.<Note>The statements below are copied from the manuscript. The hexagon proof is the manuscript's; the octagon proof is summarised, not reproduced. The research context is in §2, [Fusions of generalized polygon association schemes](/research/generalized-polygon-schemes).</Note>
+
+## The result
+
+A distance-regular graph $\Gamma$ has the intersection array of a generalized $2d$-gon of order
+$(s,t)$ when $b_0=s(t+1)$, $b_i=st$ and $c_i=1$ for $1\le i\le d-1$, and $c_d=t+1$. Its distance
+relations $A_0,\dots,A_d$ form a symmetric association scheme.
+
+<Theorem n="B" name="fusions of generalized hexagons and octagons">
+Let $d\in\{3,4\}$ and let $\Gamma$ be a distance-regular graph with the intersection array of a
+generalized $2d$-gon of order $(s,t)$, where $s,t\ge2$ are integers. The distance scheme
+$\{A_0,\dots,A_d\}$ has a proper fusion scheme if and only if $s=t$. In that case the fusion is
+unique, namely $\{\,A_0,\ A_1+\dots+A_{d-1},\ A_d\,\}$, and it is strongly regular.
+</Theorem>
+
+<Corollary n="C">
+Every thick finite generalized octagon has $s\neq t$ (Feit–Higman). Hence the distance scheme of its
+point graph has no proper fusion. In particular the $5$-class scheme of Theorem A has no proper
+fusion: apart from the trivial partition of $\{R_1,\dots,R_4\}$ into one block and the partition into
+singletons, no partition of the nontrivial orbitals into blocks gives an association scheme, and no
+strongly regular graph is a union of orbitals.
+</Corollary>
+
+Theorem A is the orbital algebra of the Tits group on $1755$ points, set out in
+[Note 2](/mathematics/tits-1755).
+
+<Figure n={1} caption="Intersection diagram of the point graph of a generalized hexagon of order (2, 2). The circles are the points at distance 0, 1, 2, 3 from a fixed point; numbers on the edges are b_i (left) and c_(i+1) (right). In red, the fusion of Theorem B for s = t = 2: the distance-1 and distance-2 relations merge into a strongly regular graph with the parameters of the collinearity graph of Q(6, 2).">
+  <IntersectionDiagram s={2} t={2} id="note1-fig1" />
+</Figure>
+
+## The fusion criterion
+
+Let $(X,\{R_i\}_{i=0}^D)$ be a symmetric association scheme with adjacency matrices $A_i$,
+valencies $k_i$ and primitive idempotents $E_0=\tfrac1{|X|}J,E_1,\dots,E_D$. The eigenmatrix
+$P=(P_{ej})$ is defined by $A_j=\sum_e P_{ej}E_e$. A *fusion* is a partition
+$\Lambda=\{B_1,\dots,B_r\}$ of $\{1,\dots,D\}$ such that
+$V_\Lambda=\operatorname{span}\{I,A_{B_1},\dots,A_{B_r}\}$, $A_B=\sum_{j\in B}A_j$, is closed under
+multiplication; then $(X,\{R_0,R_B\})$ is an $r$-class association scheme. It is *proper* if
+$2\le r\le D-1$.
+
+For $e,f\in\{1,\dots,D\}$ and $B\subseteq\{1,\dots,D\}$ put
+
+$$
+\delta^{ef}(B)=\sum_{j\in B}\bigl(P_{ej}-P_{fj}\bigr).
+$$
+
+Since $\sum_{j=0}^DA_j=J$ and $JE_e=0$ for $e\ge1$, we have $\sum_{j=1}^DP_{ej}=-1$ and therefore
+
+$$
+\delta^{ef}(B^c)=-\delta^{ef}(B). \tag{1}
+$$
+
+The following criterion is standard (cf. Bannai–Ito); the manuscript includes a proof.
+
+<Lemma n={1} name="fusion criterion">
+For a partition $\Lambda$ of $\{1,\dots,D\}$ into $r$ blocks let $e\sim_\Lambda f$ mean
+$\delta^{ef}(B)=0$ for all $B\in\Lambda$. This is an equivalence relation on $\{1,\dots,D\}$ with at
+least $r$ classes, and $\Lambda$ is a fusion if and only if it has exactly $r$ classes.
+</Lemma>
+
+<Proof>
+Write $A_B=\sum_e u_B(e)E_e$ with $u_B(e)=\sum_{j\in B}P_{ej}$. Let $\approx$ be the equivalence
+relation on $\{0,\dots,D\}$ with $e\approx f$ iff $u_B(e)=u_B(f)$ for all $B\in\Lambda$, and let
+$F\subseteq\mathbb{C}^{D+1}$ be the algebra of functions constant on $\approx$-classes; $F$ is
+identified with $\operatorname{span}\{\sum_{e\in K}E_e: K\ \text{a class}\}$. Then
+$V_\Lambda\subseteq F$ and $\dim V_\Lambda=r+1$, because the $A_B$ have disjoint supports. Since
+$J=I+\sum_BA_B\in V_\Lambda$ equals $|X|E_0$, the class of $0$ is $\{0\}$, so $\approx$ has $1+c$
+classes, where $c$ is the number of classes of $\sim_\Lambda$ on $\{1,\dots,D\}$, and $1+c\ge r+1$.
+
+If $c=r$ then $V_\Lambda=F$, which is closed under multiplication. Conversely suppose $V_\Lambda$ is
+closed under multiplication. If $e\not\approx f$ choose $x\in V_\Lambda$ with $x(e)\ne x(f)$.
+Polynomials in $x$ lie in $V_\Lambda$ (it contains $I$), so $V_\Lambda$ contains the indicator
+function of $\{g:x(g)=x(e)\}$; multiplying such indicators over finitely many separating elements
+gives the indicator of the $\approx$-class of $e$. Hence $F\subseteq V_\Lambda$, $V_\Lambda=F$ and
+$1+c=r+1$.
+</Proof>
+
+<Lemma n={2}>
+Let $\Lambda$ be a proper fusion.
+
+(a) If $D=3$ then $r=2$, and $\Lambda=\{B,B^c\}$ is a fusion iff $\delta^{ef}(B)=0$ for at least one
+pair $\{e,f\}$.
+
+(b) If $D=4$ and $r=2$, then $\Lambda=\{B,B^c\}$ is a fusion iff $\delta^{ef}(B)=0$ for at least two
+distinct pairs.
+
+(c) If $D=4$ and $r=3$, then $\Lambda=\{\{a\},\{b\},\{c,d\}\}$ and a fusion requires a pair $\{e,f\}$
+with $\delta^{ef}(\{a\})=\delta^{ef}(\{b\})=0$.
+</Lemma>
+
+<Proof>
+By Lemma 1 and (1) the conditions $\delta^{ef}(B)=0$ for all blocks of a two-block partition reduce
+to one block. (a) The relation $\sim_\Lambda$ has at least $2$ classes on three points, so it has
+exactly $2$ iff some pair is related. (b) A two-class relation on four points has class sizes $(2,2)$
+or $(3,1)$, hence at least two related pairs; conversely two related pairs give at most two classes.
+(c) Three classes on four points means one related pair $\{e,f\}$; then
+$\delta^{ef}(\{a\})=\delta^{ef}(\{b\})=0$, and $\delta^{ef}(\{c,d\})=0$ follows from (1).
+</Proof>
+
+<Lemma n={3}>
+If the scheme is metric (the point scheme of a distance-regular graph), the numbers
+$P_{e1}=\theta_e$ are pairwise distinct, so $\delta^{ef}(\{1\})\ne0$ for all $e\ne f$. In particular
+no proper fusion has $\{1\}$ (or $\{1\}^c$) as a block.
+</Lemma>
+
+<Proof>
+$A_1$ generates the Bose–Mesner algebra, which has dimension $D+1$, so $A_1$ has $D+1$ distinct
+eigenvalues.
+</Proof>
+
+## The eigenmatrix of a hexagon
+
+For $d=3$ the valencies are $k_1=s(t+1)$, $k_2=s^2t(t+1)$ and $k_3=s^3t^2$, and $a_i=s-1$ for
+$1\le i\le 2$, $a_3=(s-1)(t+1)$. Put $m=\sqrt{st}$.
+
+<Proposition n={4}>
+The eigenvalues of $A_1$ are $s(t+1)$, $-t-1$ and $s-1\pm m$. The eigenmatrix $P=(P_{ej})$, rows
+$e=0,\dots,3$ and columns $j=0,\dots,3$, is
+
+$$
+\footnotesize P=\begin{pmatrix}
+1 & s(t+1) & s^2t(t+1) & s^3t^2\\
+1 & s-1+m & ms-m-s & -ms\\
+1 & s-1-m & -ms+m-s & ms\\
+1 & -t-1 & t(t+1) & -t^2
+\end{pmatrix}.
+$$
+</Proposition>
+
+<Proof>
+The quotient (intersection) matrix of $A_1$ is tridiagonal with entries $b_{j-1},a_j,c_{j+1}$; its
+characteristic polynomial is $(x-s(t+1))(x+t+1)(x^2-2(s-1)x+(s-1)^2-st)$. For each root $\theta$ the
+row $(P_{ej})_j$ is determined by $P_{e0}=1$, $P_{e1}=\theta$ and
+$\theta P_{ej}=b_{j-1}P_{e,j-1}+a_jP_{ej}+c_{j+1}P_{e,j+1}$. The manuscript verifies symbolically,
+modulo $m^2=st$, that the displayed rows satisfy this recursion and the sum rule $\sum_jP_{ej}=0$
+($e\ge1$); the verification is reproduced by the accompanying script.
+</Proof>
+
+## Proof for hexagons
+
+<Proof of="Theorem B for d = 3">
+Let $s,t\ge2$ and $m=\sqrt{st}\gt 0$. By Lemma 2(a) we must decide, for
+$B\in\{\{1\},\{2\},\{3\}\}$, whether some pair $\{e,f\}\subset\{1,2,3\}$ has $\delta^{ef}(B)=0$.
+From Proposition 4:
+
+*$B=\{1\}$.* Impossible by Lemma 3 (directly: the differences are $2m$, $s+t+m$, $s+t-m$, and
+$m\lt s+t$).
+
+*$B=\{2\}$.* The column $j=2$ is $(ms-m-s,\ -ms+m-s,\ t(t+1))$. Then $\delta^{12}=2m(s-1)\gt 0$ and
+$\delta^{23}=-m(s-1)-s-t(t+1)\lt 0$. If $\delta^{13}=0$ then $m(s-1)=s+t^2+t$; squaring and using
+$m^2=st$ gives $f(s,t)=0$ with
+
+$$
+\begin{aligned}f(s,t)&=t\,s^3-(2t+1)s^2\\
+&\qquad-t(2t+1)s-t^2(t+1)^2 .\end{aligned}
+$$
+
+This factors as $f(s,t)=(s^2+st+t^2)\bigl(st-(t+1)^2\bigr)$. The first factor is positive, so
+$s=(t+1)^2/t=t+2+1/t$, which is not an integer for $t\ge2$. (For real $t\gt 0$ this point does
+satisfy $m(s-1)=s+t^2+t$, with $m=t+1$, so the condition is not vacuous over the reals.)
+
+*$B=\{3\}$.* The column $j=3$ is $(-ms,\ ms,\ -t^2)$. Here $\delta^{12}=-2ms\ne0$ and
+$\delta^{23}=ms+t^2\gt 0$, while $\delta^{13}=t^2-ms=0$ iff $t^4=m^2s^2=s^3t$ iff $s=t$.
+
+So a proper fusion exists iff $s=t$, and then only for $\Lambda=\{\{1,2\},\{3\}\}$.
+
+*Strong regularity.* For $s=t=q$ the eigenvalues of $A_1+A_2$ are, by Proposition 4,
+$k=q(q+1)(q^2+1)$ on $E_0$, $q^2-1$ on $E_1,E_3$ and $-q^2-1$ on $E_2$. A graph with exactly these
+eigenvalues is strongly regular with $\mu=k+rs'$ and $\lambda=\mu+r+s'$, where $r=q^2-1$,
+$s'=-q^2-1$, giving
+
+$$
+\begin{gathered}\Bigl(\tfrac{q^6-1}{q-1},\ q(q+1)(q^2+1),\\
+q^3+q^2+q-1,\ (q+1)(q^2+1)\Bigr).\end{gathered}
+$$
+</Proof>
+
+<Remark n={5}>
+These are the parameters of the collinearity graph of $Q(6,q)$. For the split Cayley hexagon $H(q)$
+the identification is classical: its points are all points of $Q(6,q)$ and two points are at
+distance $\le2$ in $H(q)$ iff they are collinear in $Q(6,q)$. The computation above shows that the
+parameter identity holds for any distance-regular graph with the array of a hexagon of order
+$(q,q)$. Direct computation of the intersection numbers for $q=2,3,4,5$ gave $(63,30,13,15)$,
+$(364,120,38,40)$, $(1365,340,83,85)$, $(3906,780,154,156)$.
+</Remark>
+
+## Octagons
+
+For $d=4$ put $m=\sqrt{2st}$. The eigenvalues of $A_1$ are $s(t+1)$, $-t-1$, $s-1\pm m$ and $s-1$.
+Every difference $\delta^{ef}(B)$ then has the form $\alpha+\beta m$ with $\alpha,\beta\in\mathbb{Z}[s,t]$,
+and the manuscript lists all $42$ cases (seven two-block partitions, six pairs) in an appendix, with
+the sign of $\alpha$ and $\beta$ for $s,t\ge2$. Its proof for octagons goes through those cases in
+three steps: two-block partitions, where the only proper fusion is $\{\{1,2,3\},\{4\}\}$ and it
+occurs iff $s=t$; three-block partitions, of which none is a fusion; and strong regularity. For $s=t$
+the eigenvalues of $A_4$ are $k_4=s^7$ on $E_0$, $-s^3$ on $E_1,E_3$ and $s^3$ on $E_2,E_4$, hence
+$A_4$ is strongly regular with parameters
+
+$$
+\Bigl(\tfrac{s^8-1}{s-1},\ s^7,\ s^7-s^6,\ s^7-s^6\Bigr).
+$$
+
+The full case analysis is in Section 5 and Appendix A of the manuscript; it is not reproduced here.
+
+<Proof of="Corollary C">
+For a thick finite generalized octagon of order $(s,t)$ the Feit–Higman theorem requires $2st$ to be
+a perfect square, so $s=t$ is impossible ($2s^2$ is never a square). Theorem B gives no proper
+fusion. A strongly regular graph that is a union $\bigcup_{i\in S}R_i$ of orbitals would give a
+two-block fusion $\{S,S^c\}$, which does not exist.
+</Proof>
+
+## How sharp it is
+
+The hypothesis $s,t\ge2$ cannot be dropped. Direct computation from the intersection numbers shows
+that the thin octagon schemes of order $(1,2)$ and $(1,8)$ admit the fusions $\{\{2\},\{1,3\},\{4\}\}$
+and $\{\{1,3\},\{2,4\}\}$, and that of order $(2,1)$ admits $\{\{2\},\{3\},\{1,4\}\}$ and
+$\{\{3\},\{1,2,4\}\}$; the scheme of order $(8,1)$ has none. For order $(2,1)$ the graph of class $3$
+is strongly regular with parameters $(45,16,8,4)$, those of the triangular graph $T(10)$. For $s=t$
+the octagon fusion $\{\{1,2,3\},\{4\}\}$ is formal: it would give strongly regular graphs such as
+$(255,128,64,64)$ for $s=2$ and $(3280,2187,1458,1458)$ for $s=3$, but no octagon of order $(s,s)$
+exists.
+
+## Verification
+
+Everything was recomputed in exact arithmetic by a verification script, including a direct
+test, from the intersection numbers alone, of the closure condition for every proper partition for
+all $841$ integer pairs $2\le s,t\le30$ and $d=3,4$; it found proper fusions exactly on the diagonal
+$s=t$ and only the fusion named in Theorem B. An independent exact certificate avoids
+eigenvalues and square roots: it writes the closure conditions of every proper partition as
+polynomial equations in $\mathbb{Q}[s,t]$, reduces them with a lexicographic Gröbner basis over
+$\mathbb{Q}$, and isolates the real solutions exactly. For all real $s,t\ge1$ the outcome agrees with
+Theorem B and with the thin cases above.
+
+<References>
+1. A. E. Brouwer, A. M. Cohen and A. Neumaier, *Distance-Regular Graphs* (Springer, 1989), doi:10.1007/978-3-642-74341-2.
+2. E. Bannai and T. Ito, *Algebraic Combinatorics I: Association Schemes* (Benjamin/Cummings, 1984).
+3. W. Feit and G. Higman, “The nonexistence of certain generalized polygons,” *J. Algebra* 1 (1964): 114–131.
+4. D. Crnković, S. Rukavina and A. Švob, “On some distance-regular graphs with many vertices,” *J. Algebraic Combin.* 51 (2020): 641–652, doi:10.1007/s10801-019-00888-5.
+5. H. Van Maldeghem, *Generalized Polygons* (Birkhäuser, 1998).
+</References>

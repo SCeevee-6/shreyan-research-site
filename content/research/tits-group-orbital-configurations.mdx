@@ -1,0 +1,87 @@
+---
+title: Orbital configurations of the Tits group
+summary: Exact computation of the orbital algebras of the Tits group on the cosets of its maximal subgroups — which are commutative, how the non-commutative ones decompose, and which unions of orbitals close into association schemes.
+question: When the Tits group acts on the cosets of a maximal subgroup, what is the structure of the resulting orbital algebra, and which fusions of its orbitals are themselves association schemes?
+field: Algebraic combinatorics · group actions
+status: Computational investigation
+period: 2026–
+date: 2026-11-01
+order: 2
+---
+
+## Question
+
+A transitive permutation group determines a coherent configuration: its orbitals on ordered pairs.
+When that configuration is commutative it is an association scheme, and its fusions — unions of
+orbitals closed under multiplication — include every strongly regular or distance-regular graph that
+the group acts on transitively. For the Tits group $T={}^2F_4(2)'$, of order
+$17\,971\,200 = 2^{11}\cdot 3^3\cdot 5^2\cdot 13$, the project computes these configurations for
+the actions on cosets of its eight maximal subgroups and asks which fusions occur.
+
+<Figure n={1} caption="The Tits group on 1755 points, seen from one point: orbitals of size 1, 10, 80, 640 and 1024. The two outer rings are drawn one dot per four points.">
+  <OrbitRings id="tits-orbits" />
+</Figure>
+
+## Motivation
+
+The rank-5 action on $1755$ points is the Ree–Tits octagon of order $(2,4)$, and the fusion question
+there is settled by the classification in [the companion project](/research/generalized-polygon-schemes).
+The other actions are not governed by a polygon, so their fusions have to be found from the
+configurations themselves — including the non-commutative ones, where the theory of association
+schemes does not apply directly.
+
+## Methods
+
+Orbitals are computed exactly from the ATLAS permutation generators: stabiliser orbits from Schreier
+generators, integer intersection numbers, centre dimensions, eigenmatrices, tests of the $P$- and
+$Q$-polynomial properties, and exhaustive tests of every partition of the orbitals for closure. Group-
+theoretic data are cross-checked in GAP against the character table library; the order of $T$ is
+re-derived by Schreier–Sims.
+
+## Results so far
+
+- **Commutativity.** On cosets of the maximal subgroups, the orbital configurations are commutative
+  for degrees $1600$ (two classes), $1755$, $2304$ and $2925$; all of these are symmetric except
+  degree $2304$. They are non-commutative for degree $12480$ (rank $24$, two classes) and degree
+  $14976$ (rank $25$).
+- **Non-commutative algebras.** The orbital algebras decompose as
+  $11\,\mathbb{C}\oplus M_2(\mathbb{C})\oplus M_3(\mathbb{C})$ (degree $12480$) and
+  $9\,\mathbb{C}\oplus 4\,M_2(\mathbb{C})$ (degree $14976$), with centre of dimension $13$ in both
+  cases, computed exactly from the structure constants and in agreement with the character
+  multiplicities.
+- **Fusions of the commutative actions.** Degree $1600$: one proper fusion, the known
+  $\mathrm{SRG}(1600,351,94,72)$. Degree $2304$: three fusions, none $P$- or $Q$-polynomial.
+  Degree $2925$: one fusion, the distance scheme of the dual octagon $\mathrm{GO}(4,2)$, which is
+  $P$- but not $Q$-polynomial. Degree $1755$: none, by the fusion theorem.
+- **Fusions of the non-commutative actions.** The $12480$-point configurations have no proper fusion
+  of rank at least $3$. Every fusion of rank at least $3$ of the $14976$-point configuration refines
+  a rank-$16$ orbital configuration of ${}^2F_4(2)$ and is non-commutative.
+- **Search for strongly regular and distance-regular graphs.** An exhaustive search over all unions
+  of orbitals, for the actions of $T$ of degree $7020$ to $17550$, found no strongly regular graph
+  and no distance-regular graph of diameter at least $3$ on $12480$ or $14976$ points; together with
+  Crnković–Rukavina–Švob this completes the primitive case. On $7020$, $8775$, $11700$ and all
+  three $17550$-point actions, only complete multipartite strongly regular graphs occur, coming from
+  the block systems, and there is no distance-regular graph of diameter at least $3$. Up to $17550$
+  vertices the only non-trivial strongly regular and distance-regular graphs with a transitive action
+  of $T$ are the four found by Crnković–Rukavina–Švob. The search range is new; it produced no new
+  graph.
+
+Details are in [§4, Note 2](/mathematics/tits-1755) and [§4, Note 3](/mathematics/tits-orbital-algebras);
+the negative results are collected in [§4, Note 4](/mathematics/results-ledger).
+
+## Limitations
+
+These are exact computations, not yet a written classification. The classification of fusion
+lattices across all actions of $T$ is a research direction and is not complete. Several results recover known
+objects; the non-commutative fusion results are new as far as a literature search found, and small.
+
+## Status
+
+Ongoing computational investigation.
+
+<References>
+1. R. A. Wilson et al., *ATLAS of Group Representations*, version 3 (online).
+2. D. Crnković, S. Rukavina and A. Švob, “On some distance-regular graphs with many vertices,” *J. Algebraic Combin.* 51 (2020): 641–652, doi:10.1007/s10801-019-00888-5.
+3. B. De Bruyn and F. Vanhove, “On Q-polynomial regular near 2d-gons,” *Combinatorica* 35 (2015): 181–208, doi:10.1007/s00493-014-3039-x.
+4. J. Tits, “Moufang octagons and the Ree groups of type ²F₄,” *Amer. J. Math.* 105 (1983): 539–594, doi:10.2307/2374268.
+</References>

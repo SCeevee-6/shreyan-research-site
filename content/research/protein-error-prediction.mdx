@@ -1,0 +1,82 @@
+---
+title: Predicting where ESM-2 is wrong
+summary: A model trained across assays that ranks the per-mutation errors of the protein language model ESM-2, so that its least reliable predictions can be set aside — and the substitution-type bias it uncovered, shared by ESM-2, ESM-1v and GEMME.
+question: Can a model trained across assays, from information available at prediction time, rank the within-assay errors of ESM-2 650M well enough for abstention?
+field: Computational biology · protein language models
+status: Preprint
+period: 2026
+date: 2026-10-26
+order: 3
+links:
+  - label: Preprint (Zenodo)
+    href: https://doi.org/10.5281/zenodo.23653009
+  - label: Code and results (Zenodo)
+    href: https://doi.org/10.5281/zenodo.23632503
+---
+
+<BeadChain />
+
+## Question
+
+Protein language models like ESM-2 can score any amino-acid substitution without experimental
+labels, from masked-token probabilities. Benchmarks such as ProteinGym grade them by the Spearman
+correlation between predicted and measured effects across a whole assay. But if you have to decide
+which individual predictions to act on, a whole-assay number doesn't help. You want to know, for
+each mutation, how wrong the prediction is likely to be.
+
+So the question was: can a model trained on some ProteinGym assays predict the per-mutation errors of
+ESM-2 650M on proteins it has never seen, well enough to set the worst predictions aside — and better
+than the model's own confidence signals, like the wild-type log-probability or the entropy of the
+masked marginal?
+
+## Methods
+
+A gradient-boosted model of each mutation's absolute rank error was trained on $162$ ProteinGym
+development assays, using information available at prediction time. It was evaluated once, under an
+internally prespecified plan, on $49$ test assays held out by $30\%$ sequence-identity clustering.
+The design was written down and hashed before any modelling, later changes were logged as dated
+amendments, and only one confirmatory evaluation on the held-out set was allowed. That plan was kept in
+my own records, not in an external registry.
+
+The score is the normalized area under the risk–coverage curve: rank the predictions by how risky
+they look, withhold the riskiest, and track the error of what's left as you keep fewer and fewer.
+
+## Results
+
+- **Against the baseline.** The error model's normalized area under the risk–coverage curve was
+  $0.258$, against $0.067$ for the strongest baseline, the wild-type log-probability: a mean paired
+  difference of $0.191$ $[0.143, 0.240]$, better in $44$ of $49$ assays.
+
+<Figure n={1} wide caption="Confirmatory test result. (A) Mean risk–coverage curves over the 49 test assays: the mean rank error of the mutations kept as the share kept falls, for the error model, the prespecified baselines, random abstention and the oracle ordering. (B) Per-assay difference in nAURC between the error model and the best baseline, in three study groups; diamond and bar show the group mean with its bootstrap interval.">
+  <img src="/figures/esm2-risk-coverage.png" width="1950" height="880" alt="Left: risk–coverage curves; the error model's curve sits well below all baselines, between them and the oracle. Right: per-assay differences, mostly positive, with group means 0.360 for the Tsuboyama study, 0.087 for other studies shared with training, and 0.126 for studies absent from training." className="fig-raster" loading="lazy" />
+</Figure>
+- **A shared bias.** Much of the gain corrects a bias by substitution type that ESM-2, ESM-1v and
+  GEMME share: all three rank substitutions to cysteine, tryptophan, methionine and aromatic residues
+  as more damaging than measured. The ESM-2 pattern held in four of five assay selection types
+  (a post hoc analysis).
+
+<Figure n={2} wide caption="Residue-level error pattern on the development assays (post hoc). (A) For each mutant residue, the mean predicted-minus-measured rank for ESM-2, ESM-1v and GEMME; negative means ranked more damaging than measured. (B) The same by wild-type residue. (C) The ESM-2 pattern within each selection type, with the Spearman correlation of each subset's pattern with the full pattern.">
+  <img src="/figures/esm2-substitution-bias.png" width="1950" height="1230" alt="Dot plots by amino acid. Substitutions to C, W, M, Y and F sit furthest left for ESM-2, ESM-1v and GEMME, meaning they are predicted more damaging than measured; the pattern repeats across stability, activity, binding, expression and organismal-fitness assays." className="fig-raster" loading="lazy" />
+</Figure>
+- **A table practitioners can use.** A cross-assay table of substitution-pair errors, combined with
+  the rank floor, recovered $0.80$ of the test-set gain over the baseline. The table is deposited
+  with the code and can be used directly.
+- **Proteins absent from training.** In a preregistered test on $13$ proteins absent from training,
+  the error model again beat the baseline ($+0.095$ $[+0.010, +0.178]$), and did so on a
+  floor-robust metric computed within rank deciles ($+0.057$ $[+0.005, +0.112]$), but not on its
+  whole-assay version ($+0.002$ $[-0.094, +0.102]$). Its small increment over the pair table, real
+  within ProteinGym, did not clearly transfer. A smaller preregistered test on new studies of the
+  test proteins was inconclusive.
+
+## Limitations
+
+The prespecified negative control failed, and opening the test set was my decision. One
+study shared between training and test inflates the headline effect. The model did not improve
+top-50 selection, and it orders predictions rather than giving calibrated uncertainty.
+
+## Status
+
+Preprint on Zenodo, 26 October 2026: *Zero-shot mutation-effect predictors share a substitution-type
+bias: predicting per-mutation errors of ESM-2 for abstention*. Code, result files and the
+substitution-pair table are in the accompanying Zenodo deposit. The full manuscript and supplement
+are attached to the preprint record.

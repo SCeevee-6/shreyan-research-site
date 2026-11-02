@@ -1,0 +1,615 @@
+@import "tailwindcss";
+
+/* ───────────────────────────── Tokens ───────────────────────────── */
+
+:root {
+  --paper: #f3efe7;
+  --paper-2: #eae5da;
+  --ink: #1a1915;
+  --ink-2: #45423b;
+  --ink-3: #68645a;
+  --hair: rgb(26 25 21 / 0.18);
+  --hair-strong: rgb(26 25 21 / 0.42);
+  --red: #b3301a;
+
+  /* the sheet */
+  --gutter: 1.25rem;
+  --rail: 0px;
+  --gap-l: 0px;
+  --measure: 36rem;
+  --gap-r: 0px;
+  --margin: 0px;
+
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --t: 160ms;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141310;
+    --paper-2: #1d1c18;
+    --ink: #e9e4d8;
+    --ink-2: #bdb7aa;
+    --ink-3: #938d80;
+    --hair: rgb(233 228 216 / 0.2);
+    --hair-strong: rgb(233 228 216 / 0.45);
+    --red: #ee6c52;
+  }
+}
+
+@media (min-width: 640px) {
+  :root { --gutter: 2rem; }
+}
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 2rem;
+    --rail: 6.5rem;
+    --gap-l: 2rem;
+    --gap-r: 2.5rem;
+    --margin: 12rem;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --rail: 9rem;
+    --gap-l: 2.5rem;
+    --gap-r: 3rem;
+    --margin: 14rem;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-hair: var(--hair);
+  --color-red: var(--red);
+
+  --font-serif: var(--ff-serif), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--ff-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--ff-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.4;
+  --text-note: 0.8125rem;
+  --text-note--line-height: 1.45;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.5;
+  --text-body: 1.125rem;
+  --text-body--line-height: 1.62;
+  --text-lede: 1.375rem;
+  --text-lede--line-height: 1.45;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.3;
+  --text-h2: 1.75rem;
+  --text-h2--line-height: 1.2;
+}
+
+/* ───────────────────────────── Base ───────────────────────────── */
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 2rem;
+  }
+  body {
+    font-family: var(--font-serif);
+    font-size: var(--text-body);
+    line-height: 1.62;
+    font-kerning: normal;
+    font-variant-numeric: oldstyle-nums proportional-nums;
+    background: var(--paper);
+    min-height: 100dvh;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--red) 22%, transparent);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+  a {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--hair-strong);
+    text-underline-offset: 0.2em;
+    transition: color var(--t) var(--ease), text-decoration-color var(--t) var(--ease);
+  }
+  a:hover {
+    color: var(--red);
+    text-decoration-color: var(--red);
+  }
+  hr {
+    border: 0;
+    border-top: 1px solid var(--hair);
+  }
+  h1, h2, h3, h4 {
+    font-weight: 400;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; hanging-punctuation: first; }
+  abbr[title] { text-decoration: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+/* ───────────────────────────── Apparatus ───────────────────────────── */
+
+@layer components {
+  /* Small tracked uppercase label — the Swiss half of the system. */
+  .label {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    line-height: 1.4;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-stretch: 100%;
+  }
+  .label-muted { color: var(--ink-3); }
+
+  .smallcaps {
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.04em;
+    font-variant-numeric: oldstyle-nums;
+  }
+  .tnum { font-variant-numeric: lining-nums tabular-nums; }
+  .onum { font-variant-numeric: oldstyle-nums proportional-nums; }
+
+  .link-quiet { text-decoration-color: transparent; }
+  .link-quiet:hover { text-decoration-color: var(--red); }
+
+  .rule-heavy { border-top: 2px solid var(--ink); }
+  .rule-hair { border-top: 1px solid var(--hair); }
+
+  .sect { color: var(--red); font-feature-settings: "ss01"; }
+
+  .skip-link {
+    position: absolute;
+    left: var(--gutter);
+    top: -10rem;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.5rem 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 0.75rem; color: var(--paper); }
+
+  /* ── The sheet grid ── */
+  .sheet {
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(var(--gutter), 1fr)
+      [rail-start] var(--rail) [rail-end]
+      var(--gap-l)
+      [text-start] minmax(0, var(--measure)) [text-end]
+      var(--gap-r)
+      [margin-start] var(--margin) [margin-end]
+      minmax(var(--gutter), 1fr) [full-end];
+    align-items: start;
+  }
+  .sheet > *, .sheet-row > * { grid-column: text; min-width: 0; }
+  .sheet-row {
+    grid-column: full;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: start;
+  }
+  .col-rail { grid-column: rail !important; }
+  .col-text { grid-column: text !important; }
+  .col-margin { grid-column: margin !important; }
+  .col-wide { grid-column: text-start / margin-end !important; }
+  .col-sheet { grid-column: rail-start / margin-end !important; }
+  .col-full { grid-column: full !important; }
+  .col-lead { grid-column: rail-start / text-end !important; }
+
+  /* Below the desktop sheet, rail and margin fold into the text column. */
+  @media (max-width: 1023.98px) {
+    .col-rail, .col-margin, .col-wide, .col-sheet, .col-lead { grid-column: text !important; }
+    .sheet { grid-template-columns: [full-start] var(--gutter) [rail-start text-start margin-start] minmax(0, 1fr) [rail-end text-end margin-end] var(--gutter) [full-end]; }
+    .sheet-row > .col-margin {
+      border-left: 1px solid var(--red);
+      padding-left: 0.875rem;
+      margin-top: 1rem;
+    }
+    .sheet-row > .col-rail { margin-bottom: 0.5rem; }
+  }
+  @media (min-width: 640px) and (max-width: 1023.98px) {
+    .sheet { grid-template-columns: [full-start] minmax(var(--gutter), 1fr) [rail-start text-start margin-start] minmax(0, 42rem) [rail-end text-end margin-end] minmax(var(--gutter), 1fr) [full-end]; }
+  }
+
+  /* Dot leaders for contents rows */
+  .leaders {
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    align-self: baseline;
+    border-bottom: 1px dotted var(--hair-strong);
+    transform: translateY(-0.28em);
+    transition: border-color var(--t) var(--ease);
+  }
+
+  /* Margin meta list */
+  .meta dt { font-family: var(--font-sans); font-size: var(--text-micro); letter-spacing: 0.085em; text-transform: uppercase; font-weight: 500; color: var(--ink-3); }
+  .meta dd { font-size: var(--text-note); line-height: 1.45; margin: 0.15rem 0 0; color: var(--ink-2); }
+  .meta > div + div { margin-top: 0.9rem; }
+
+  /* ── Reading text ── */
+  .prose-sheet { counter-reset: h2 sidenote figure; }
+  .prose-sheet > * + * { margin-top: 1.1em; }
+  .prose-sheet p { hyphens: auto; -webkit-hyphens: auto; }
+  .prose-sheet h2 {
+    font-size: var(--text-h2);
+    line-height: 1.2;
+    margin-top: 2.6em;
+    margin-bottom: -0.2em;
+  }
+  .prose-sheet h3 {
+    font-size: var(--text-h3);
+    font-style: italic;
+    margin-top: 2em;
+    margin-bottom: -0.4em;
+  }
+  .prose-sheet[data-numbered] h2::before {
+    counter-increment: h2;
+    content: counter(h2);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--red);
+    font-variant-numeric: lining-nums tabular-nums;
+    display: inline-block;
+    min-width: 1.75rem;
+    vertical-align: 0.35em;
+  }
+  @media (min-width: 1024px) {
+    .prose-sheet[data-numbered] h2::before {
+      margin-left: -2.5rem;
+      min-width: 2.5rem;
+    }
+  }
+  .prose-sheet ul, .prose-sheet ol { padding-left: 1.25em; }
+  .prose-sheet ul { list-style: none; }
+  .prose-sheet ul > li { position: relative; }
+  .prose-sheet ul > li::before {
+    content: "–";
+    position: absolute;
+    left: -1.1em;
+    color: var(--ink-3);
+  }
+  .prose-sheet ol { list-style: decimal; }
+  .prose-sheet ol > li::marker { font-family: var(--font-sans); font-size: 0.8em; color: var(--ink-3); }
+  .prose-sheet li + li { margin-top: 0.35em; }
+  .prose-sheet blockquote {
+    font-style: italic;
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--hair-strong);
+    color: var(--ink-2);
+  }
+  .prose-sheet code {
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    background: var(--paper-2);
+    padding: 0.08em 0.3em;
+  }
+  .prose-sheet strong { font-weight: 600; }
+  .prose-sheet table { width: 100%; border-collapse: collapse; font-size: var(--text-small); }
+  .prose-sheet th { font-family: var(--font-sans); font-size: var(--text-micro); letter-spacing: 0.085em; text-transform: uppercase; font-weight: 500; text-align: left; color: var(--ink-3); border-bottom: 1px solid var(--ink); padding: 0.5rem 0.75rem 0.4rem 0; }
+  .prose-sheet td { border-bottom: 1px solid var(--hair); padding: 0.5rem 0.75rem 0.5rem 0; font-variant-numeric: lining-nums tabular-nums; vertical-align: top; }
+
+  /* ── Sidenotes (Tufte-style float into the margin) ── */
+  .sn-ref {
+    counter-increment: sidenote;
+  }
+  .sn-ref::after {
+    content: counter(sidenote);
+    font-family: var(--font-sans);
+    font-size: 0.66em;
+    font-weight: 600;
+    color: var(--red);
+    vertical-align: super;
+    line-height: 0;
+    padding-left: 0.1em;
+  }
+  .sidenote {
+    display: block;
+    font-size: var(--text-note);
+    line-height: 1.45;
+    color: var(--ink-2);
+    hyphens: manual;
+  }
+  .sidenote::before {
+    content: counter(sidenote) " ";
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--red);
+  }
+  .sn-toggle { position: absolute; opacity: 0; pointer-events: none; }
+  @media (min-width: 1024px) {
+    .sidenote {
+      float: right;
+      clear: right;
+      width: var(--margin);
+      margin-right: calc(-1 * (var(--margin) + var(--gap-r)));
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+    }
+    label.sn-ref { cursor: default; }
+  }
+  @media (max-width: 1023.98px) {
+    label.sn-ref { cursor: pointer; }
+    label.sn-ref::after {
+      padding: 0 0.15em;
+      border-bottom: 1px solid var(--red);
+    }
+    .sidenote {
+      display: none;
+      margin: 0.75rem 0;
+      padding-left: 0.875rem;
+      border-left: 1px solid var(--red);
+    }
+    .sn-toggle:checked + .sidenote { display: block; }
+    .sn-toggle:focus-visible + .sidenote, .sn-toggle:focus-visible ~ .sidenote { outline: 2px solid var(--red); }
+  }
+
+  /* ── Mathematics ── */
+  .prose-sheet .katex { font-size: 1.06em; }
+  .katex-display {
+    margin: 1.5em 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.25em 0;
+  }
+  .katex-display > .katex > .katex-html > .tag { color: var(--ink-3); }
+  /* Phones: display maths and tables set a size smaller so they fit the column rather than scroll. */
+  @media (max-width: 639px) {
+    /* KaTeX's own stylesheet is unlayered (1.21em), so this needs !important to win. */
+    .prose-sheet .katex-display > .katex { font-size: 1.04em !important; }
+    .prose-sheet table { font-size: 0.8125rem; }
+    .prose-sheet th, .prose-sheet td { padding-right: 0.5rem; }
+  }
+  .theorem {
+    counter-increment: theorem;
+    margin-top: 1.75em !important;
+    margin-bottom: 1.75em;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--ink);
+  }
+  .theorem[data-kind="definition"], .theorem[data-kind="remark"] { border-left-color: var(--hair-strong); }
+  .theorem-head { font-family: var(--font-sans); font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+  .theorem-head .theorem-name { text-transform: none; letter-spacing: 0; font-family: var(--font-serif); font-weight: 400; font-style: italic; font-size: 1rem; }
+  .theorem-body { font-style: italic; margin-top: 0.3rem; }
+  .theorem[data-kind="definition"] .theorem-body, .theorem[data-kind="remark"] .theorem-body { font-style: normal; }
+  .theorem-body > * + * { margin-top: 0.8em; }
+  .proof > * + * { margin-top: 0.9em; }
+  .proof-head { font-style: italic; }
+  .proof::after {
+    content: "∎";
+    display: block;
+    text-align: right;
+    margin-top: -1.55em;
+    color: var(--ink);
+  }
+
+  /* ── Figures ── */
+  .figure figcaption {
+    font-size: var(--text-note);
+    line-height: 1.45;
+    color: var(--ink-2);
+    margin-top: 0.75rem;
+  }
+  .figure svg { width: 100%; height: auto; display: block; }
+  .fig-ink { stroke: var(--ink); fill: none; vector-effect: non-scaling-stroke; }
+  .fig-hair { stroke: var(--hair-strong); fill: none; vector-effect: non-scaling-stroke; }
+  .fig-red { stroke: var(--red); fill: none; vector-effect: non-scaling-stroke; }
+  .fig-text { fill: var(--ink-3); font-family: var(--font-sans); }
+
+  /* ── Abstract ── */
+  .abstract { background: var(--paper-2); padding: 1.25rem 1.5rem 1.4rem; }
+  .abstract p { font-size: 1.0625rem; line-height: 1.58; }
+  .abstract p + p { margin-top: 0.8em; }
+
+  /* ── Poems ── */
+  .poem { font-size: 1.1875rem; line-height: 1.7; counter-reset: line; }
+  .poem .stanza + .stanza { margin-top: 1.7em; }
+  .poem .line {
+    position: relative;
+    padding-left: 2em;
+    text-indent: -2em;
+  }
+  .poem .line[data-indent="1"] { padding-left: 4em; }
+  .poem .ln {
+    position: absolute;
+    left: -3.25rem;
+    width: 2.25rem;
+    text-align: right;
+    text-indent: 0;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    color: var(--ink-3);
+    font-variant-numeric: lining-nums tabular-nums;
+    top: 0.55em;
+  }
+  @media (max-width: 639.98px) {
+    .poem { font-size: 1.0625rem; }
+    .poem .ln { display: none; }
+  }
+
+  /* ── Bibliography ── */
+  .cite { padding-left: 1.5rem; text-indent: -1.5rem; }
+  .bibtex {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.55;
+    background: var(--paper-2);
+    padding: 1rem 1.125rem;
+    white-space: pre;
+    overflow-x: auto;
+    tab-size: 2;
+  }
+
+  /* Bracketed action links: [pdf] [doi] [cite] */
+  .bracket {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--ink-2);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  .bracket::before { content: "["; color: var(--ink-3); padding-right: 0.1em; }
+  .bracket::after { content: "]"; color: var(--ink-3); padding-left: 0.1em; }
+  .bracket:hover { color: var(--red); }
+
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+}
+
+/* ───────────── Article apparatus (added with the MDX components) ───────────── */
+@layer components {
+  @media (min-width: 1024px) {
+    .sn-toggle { display: none; }
+    .fig-wide { margin-right: calc(-1 * (var(--margin) + var(--gap-r))); }
+  }
+  .proof-head { float: left; margin-right: 0.4em; }
+  .proof > p:nth-child(2) { margin-top: 0; }
+
+  .refs { margin-top: 3.5rem !important; border-top: 2px solid var(--ink); padding-top: 1rem; }
+  .prose-sheet .refs h2 { margin: 0 0 1rem; font-size: var(--text-micro); }
+  .prose-sheet .refs h2::before { content: none; }
+  .refs ol { list-style: none; padding: 0; counter-reset: ref; font-size: var(--text-small); line-height: 1.5; }
+  .refs li { counter-increment: ref; position: relative; padding-left: 2.25rem; }
+  .refs li::before {
+    content: "[" counter(ref) "]";
+    position: absolute; left: 0; top: 0.2em;
+    font-family: var(--font-sans); font-size: 0.75rem; color: var(--ink-3);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .refs li + li { margin-top: 0.6em; }
+}
+
+@layer components {
+  @media (max-width: 1023.98px) {
+    .sheet-row > .col-margin.plain { border-left: 0; padding-left: 0; margin-top: 0.25rem; }
+  }
+}
+
+/* ── Tally & ledger (achievements) ── */
+@layer components {
+  .tally > div + div { border-left: 1px solid var(--hair); padding-left: 1.25rem; }
+  @media (max-width: 639.98px) {
+    .tally > div:nth-child(3) { border-left: 0; padding-left: 0; }
+    .tally > div:nth-child(n + 3) { border-top: 1px solid var(--hair); }
+  }
+
+  .ledger { border-collapse: collapse; width: 100%; table-layout: fixed; }
+  .ledger td:nth-child(2) { width: 8.5rem; }
+  .ledger td:nth-child(3) { width: 9.5rem; }
+  .ledger td { vertical-align: baseline; padding: 1rem 0; border-bottom: 1px solid var(--hair); }
+  .ledger tr:last-child td { border-bottom: 0; }
+  .ledger td + td { padding-left: 1.5rem; white-space: nowrap; }
+  @media (min-width: 1024px) {
+    .ledger tr:first-child td { padding-top: 1.35rem; }
+  }
+  @media (max-width: 639.98px) {
+    .ledger, .ledger tbody, .ledger tr, .ledger td { display: block; }
+    .ledger tr { padding: 0.9rem 0; border-bottom: 1px solid var(--hair); }
+    .ledger tr:last-child { border-bottom: 0; }
+    .ledger td { border: 0; padding: 0; }
+    .ledger td + td { display: inline-block; width: auto !important; padding: 0.5rem 1rem 0 0; }
+  }
+}
+
+/* Phone-width statements: inline KaTeX, allowed to wrap, centred like display maths. */
+@layer components {
+  .statement-inline { text-align: center; padding: 0.9rem 0; line-height: 2; font-size: 0.92em; }
+}
+
+/* ── Programme (music) ── */
+@layer components {
+  .programme { text-align: center; }
+  .programme .composer { font-variant-caps: all-small-caps; letter-spacing: 0.09em; font-size: 1.25rem; }
+  .programme .part {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .programme .part::before, .programme .part::after { content: ""; flex: 1; border-top: 1px solid var(--hair); }
+}
+
+/* ── Figure motion: strokes draw in, a point walks a polygon, a chain ripples. Text never moves. ── */
+.draw[data-state="ready"] [data-draw] { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.draw[data-state="in"] [data-draw] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-stroke 1100ms cubic-bezier(0.65, 0, 0.25, 1) var(--d, 0ms) forwards;
+}
+@keyframes draw-stroke { to { stroke-dashoffset: 0; } }
+
+.bead { fill: var(--ink-3); transform-box: fill-box; transform-origin: center; animation: bead-bob 3.6s ease-in-out infinite; animation-delay: calc(var(--i) * -0.16s); }
+.bead-flag { fill: var(--red); stroke: var(--red); stroke-width: 1.5; animation: bead-bob 3.6s ease-in-out infinite, bead-abstain 7s ease-in-out infinite; animation-delay: calc(var(--i) * -0.16s), calc(var(--i) * -0.4s); }
+@keyframes bead-bob { 0%, 100% { transform: translateY(-9px); } 50% { transform: translateY(9px); } }
+@keyframes bead-abstain { 0%, 55%, 100% { fill: var(--red); } 70%, 90% { fill: var(--paper); } }
+
+/* Raster figures: white paper becomes this paper. Light: multiply. Dark: invert, keep hues, screen. */
+.fig-raster { display: block; width: 100%; height: auto; mix-blend-mode: multiply; filter: sepia(0.08) contrast(0.96); }
+@media (prefers-color-scheme: dark) {
+  .fig-raster { mix-blend-mode: screen; filter: invert(0.92) hue-rotate(180deg) saturate(1.15) contrast(0.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .walker { display: none; }
+  .bead, .bead-flag { animation: none; }
+}
+
+/* ── The doily (GQ(2,2)) ── */
+.doily { display: block; width: 100%; height: auto; overflow: visible; }
+.doily-line { fill: none; stroke: var(--ink-3); stroke-width: 1.3; stroke-opacity: 0.55; transition: stroke 160ms, stroke-opacity 160ms, stroke-width 160ms; }
+.doily-line.is-walk { stroke: var(--red); stroke-opacity: 1; stroke-width: 2.4; }
+.doily-line.is-lit { stroke: var(--ink); stroke-opacity: 1; stroke-width: 2.2; }
+.doily-point { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; cursor: pointer; transition: r 160ms; }
+.doily-point.is-lit { fill: var(--ink); }
+.doily-point:focus-visible { outline: none; stroke: var(--red); stroke-width: 3; }
+.doily-walker { fill: none; stroke: var(--red); stroke-width: 2; transition: cx 900ms cubic-bezier(0.65, 0, 0.25, 1), cy 900ms cubic-bezier(0.65, 0, 0.25, 1); pointer-events: none; }
+.doily .doily-line { animation: doily-draw 1.6s cubic-bezier(0.65, 0, 0.25, 1) both; animation-delay: calc(var(--i) * 70ms); stroke-dasharray: 1200; }
+@keyframes doily-draw { from { stroke-dashoffset: 1200; } to { stroke-dashoffset: 0; } }
+
+/* ── Orbit rings (the Tits group on 1755 points) ── */
+.orbits { display: block; width: 100%; height: auto; }
+.orbit-ring { transform-box: view-box; transform-origin: 300px 300px; animation: orbit-turn calc(30s + var(--k) * 22s) linear infinite; animation-direction: alternate; }
+.orbit-ring:nth-of-type(even) { animation-direction: alternate-reverse; }
+@keyframes orbit-turn { to { transform: rotate(360deg); } }
+.orbit-spoke { stroke: var(--red); stroke-width: 1; stroke-opacity: 0.6; animation: spoke-pulse 4s ease-in-out infinite; animation-delay: calc(var(--i) * 0.4s); }
+@keyframes spoke-pulse { 0%, 100% { stroke-opacity: 0.15; } 50% { stroke-opacity: 0.85; } }
+
+/* ── Red-pencil margin notes ── */
+.scribble { display: inline-flex; align-items: center; gap: 0.25rem; color: var(--red); pointer-events: none; }
+.scribble-text { display: inline-block; text-transform: none; letter-spacing: 0; font-family: var(--ff-hand), cursive; font-size: 1.45rem; line-height: 1.05; font-weight: 500; }
+.scribble-arrow { width: 3.4rem; height: auto; overflow: visible; }
+.scribble-arrow path { fill: none; stroke: var(--red); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (prefers-reduced-motion: reduce) {
+  .doily .doily-line, .orbit-ring, .orbit-spoke { animation: none; }
+  .doily-walker { transition: none; }
+}
