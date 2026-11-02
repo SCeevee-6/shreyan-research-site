@@ -10,6 +10,10 @@ import { OrbitRings } from "./figures/OrbitRings";
 import { FusionCheck } from "./figures/FusionCheck";
 import { FusionLattice } from "./figures/FusionLattice";
 import { Pencil } from "./Pencil";
+import { RiskCoverage } from "./figures/RiskCoverage";
+import { BiasHeatmap } from "./figures/BiasHeatmap";
+import { FitVsLaw } from "./figures/FitVsLaw";
+import { Gloss } from "./Gloss";
 import { Plot } from "./figures/Plot";
 
 type Kind = "theorem" | "lemma" | "proposition" | "corollary" | "definition" | "remark";
@@ -96,6 +100,10 @@ function makeComponents() {
     FusionCheck,
     FusionLattice,
     Pencil,
+    RiskCoverage,
+    BiasHeatmap,
+    FitVsLaw,
+    Gloss,
     Plot,
   };
 }

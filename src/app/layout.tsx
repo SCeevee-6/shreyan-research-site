@@ -10,6 +10,7 @@ import { CommandPalette, type PaletteItem } from "@/components/CommandPalette";
 import { Eggs } from "@/components/Eggs";
 import { sections } from "@/site.config";
 import { getCollection } from "@/lib/content";
+import { eggs } from "./appendix/eggs";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -50,6 +51,8 @@ async function paletteItems(): Promise<PaletteItem[]> {
     ...research.map((r) => ({ label: r.data.title, href: `/research/${r.slug}`, group: "Research" })),
     ...maths.map((m) => ({ label: `Note ${m.data.n}: ${m.data.title}`, href: `/mathematics/${m.slug}`, group: "Mathematics" })),
     ...writing.map((w) => ({ label: w.data.title, href: `/writing/${w.slug}`, group: "Writing" })),
+    { label: "Appendix: things to play with", href: "/appendix", group: "∎" },
+    ...eggs.map((e) => ({ label: e.title, href: `/appendix/${e.slug}`, group: "Appendix" })),
   ];
 }
 

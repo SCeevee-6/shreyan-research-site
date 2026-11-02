@@ -31,14 +31,14 @@ masked marginal?
 
 ## Methods
 
-A gradient-boosted model of each mutation's absolute rank error was trained on $162$ ProteinGym
+A gradient-boosted model of each mutation's absolute <Gloss t="rank error">rank error</Gloss> was trained on $162$ ProteinGym
 development assays, using information available at prediction time. It was evaluated once, under an
 internally prespecified plan, on $49$ test assays held out by $30\%$ sequence-identity clustering.
 The design was written down and hashed before any modelling, later changes were logged as dated
 amendments, and only one confirmatory evaluation on the held-out set was allowed. That plan was kept in
 my own records, not in an external registry.
 
-The score is the normalized area under the risk–coverage curve: rank the predictions by how risky
+The score is the <Gloss t="naurc">normalized area under the risk–coverage curve</Gloss>: rank the predictions by how risky
 they look, withhold the riskiest, and track the error of what's left as you keep fewer and fewer.
 
 ## Results
@@ -50,6 +50,11 @@ they look, withhold the riskiest, and track the error of what's left as you keep
 <Figure n={1} wide caption="Confirmatory test result. (A) Mean risk–coverage curves over the 49 test assays: the mean rank error of the mutations kept as the share kept falls, for the error model, the prespecified baselines, random abstention and the oracle ordering. (B) Per-assay difference in nAURC between the error model and the best baseline, in three study groups; diamond and bar show the group mean with its bootstrap interval.">
   <img src="/figures/esm2-risk-coverage.png" width="1950" height="880" alt="Left: risk–coverage curves; the error model's curve sits well below all baselines, between them and the oracle. Right: per-assay differences, mostly positive, with group means 0.360 for the Tsuboyama study, 0.087 for other studies shared with training, and 0.126 for studies absent from training." className="fig-raster" loading="lazy" />
 </Figure>
+
+The same curves from the deposited results file. Drag the coverage down:
+
+<RiskCoverage />
+
 - **A shared bias.** Much of the gain corrects a bias by substitution type that ESM-2, ESM-1v and
   GEMME share: all three rank substitutions to <Pencil note="C, W, M: all too harsh" tilt={2}>cysteine, tryptophan, methionine</Pencil> and aromatic residues
   as more damaging than measured. The ESM-2 pattern held in four of five assay selection types
@@ -60,7 +65,10 @@ they look, withhold the riskiest, and track the error of what's left as you keep
 </Figure>
 - **A table practitioners can use.** A cross-assay table of substitution-pair errors, combined with
   the rank floor, recovered $0.80$ of the test-set gain over the baseline. The table is deposited
-  with the code and can be used directly.
+  with the code and can be used directly. Here it is, all 380 substitutions:
+
+<BiasHeatmap />
+
 - **Proteins absent from training.** In a preregistered test on $13$ proteins absent from training,
   the error model again beat the baseline ($+0.095$ $[+0.010, +0.178]$), and did so on a
   floor-robust metric computed within rank deciles ($+0.057$ $[+0.005, +0.112]$), but not on its

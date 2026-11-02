@@ -1,0 +1,68 @@
+---
+title: Checking AI-discovered equations against the laws they must obey
+summary: Sparse regression finds differential equations that fit held-out data well and still break basic physical laws. A verifier that proves or refutes each law exactly, and a repair loop driven by its counterexamples. My ISEF project; the pilot is done.
+question: Can counterexample-guided mathematical verification identify and eliminate physically inadmissible differential equations that match the best held-out accuracy, and can it do so more reliably than conventional validation?
+field: Scientific machine learning · formal verification
+status: Ongoing research
+period: 2026–
+date: 2026-11-02
+order: 4
+---
+
+<FitVsLaw />
+
+## Question
+
+Equation-discovery methods like sparse regression return the differential equation that best fits the
+data. But a model can fit well and still say something impossible: a population that goes negative, or a
+total that isn't conserved. The question is whether checking the laws exactly — with a proof when a law
+holds and a concrete counterexample when it doesn't — catches these models, and catches them better than
+the usual validation scores.
+
+## The pilot
+
+Two polynomial testbeds with known truth: a logistic predator–prey model and an SIR model with varying
+total population. Candidate equations came from sparse regression (STLSQ), across 2–3 library degrees,
+12 thresholds and 9 data resamples per cell. The physical laws are written as polynomial sign conditions
+that are linear in the coefficients: positivity of populations, a trapping region, “susceptibles never
+increase, removed never decrease”, and conservation of total population. Verification uses exact
+rational arithmetic in z3, with an independent Bernstein branch-and-bound fallback. A third arm removes
+the logistic $x^2$ term from the library, so the true law can’t be expressed at all.
+
+The grid was 45 cells (3 noise levels × 5 seeds × 3 arms): $5{,}553$ candidates, of which $3{,}924$
+($70.7\%$) were <Gloss t="accuracy-equivalent">accuracy-equivalent</Gloss> — held-out error within $10\%$ of the cell’s best. The decision
+criteria were written down before the run.
+
+## What it found
+
+- **The gap is real.** $42$–$82\%$ of accuracy-equivalent models violate a law in all six
+  well-specified groups, and $93$–$100\%$ with the misspecified library. The model that held-out error
+  alone would pick violates a law in $40\%$ of predator–prey cells and $40\%$ of SIR cells.
+- **The verifier is sound.** Recall $1.00$ (partly by construction of the label) with no false flags among $4{,}477$ flagged models, and no
+  disagreements in $4{,}407$ exact one-dimensional and $9{,}805$ Bernstein cross-checks.
+- **Repair works.** Feeding the verifier’s counterexamples back into a constrained refit repaired
+  $99.25\%$ of violating models ($2{,}913$ of $2{,}935$), with a median of 3 iterations and no median
+  accuracy cost. Random constraints at the same budget repaired $17.4\%$.
+- **But the original comparison failed.** In these testbeds AIC alone ranks violators with AUROC
+  $0.966$, and 200 random test points per law flag $97.6\%$ of violators. So “more reliable than
+  conventional validation” isn’t supported as stated.
+
+## Where it goes next
+
+The pilot’s pre-registered verdict was *revise*. What the evidence supports is narrower and, I think,
+more interesting: *certification* — a decision with a proof or an exact witness, which matters near
+the tolerance: for SIR violations within $1$–$1.5\times$ the tolerance, random testing at 200 points
+finds $27\%$ and the verifier finds all of them; *misspecification* — when every well-scoring model is inadmissible,
+validation picks a violator in every cell and can’t flag it; and *repair*. The control still missing
+is a repair loop driven by random-sample counterexamples instead of SMT ones, to see how much of the
+benefit is the feedback loop itself.
+
+## Limitations
+
+Two polynomial systems, with hand-chosen laws and tolerances; nothing yet on trigonometric terms,
+neural models or real data. The truth sits inside a sparse library, which favours AIC, and only one
+misspecification was tested. Deviations from the approved plan are logged in the protocol.
+
+## Status
+
+Pilot complete. The full study for ISEF is in progress.

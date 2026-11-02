@@ -31,6 +31,7 @@ export function Colophon() {
           <p className="mt-3 text-ink-3">© {new Date().getUTCFullYear()} {site.name}. Text and images may not be reused without permission.</p>
           <p className="mt-3"><Link href="/feed.xml" className="link-quiet">RSS feed</Link></p>
           <p className="mt-3 hidden text-ink-3 lg:block">Press <kbd className="kbd">/</kbd> to jump anywhere.</p>
+          <p className="mt-3"><Link href="/appendix" className="link-quiet text-ink-3 no-underline" title="Appendix">∎</Link></p>
         </div>
       </div>
     </footer>

@@ -732,3 +732,137 @@ body::after {
   .fuse-snap, .ford-c circle, .ink-settle, .egg { animation: none; }
   .sect-mark { transition: none; }
 }
+
+/* ── Poem skip ── */
+.poem-skip { position: absolute; right: 0; top: -2.2rem; background: none; border: 0; padding: 0; cursor: pointer; min-height: 1.5rem; color: var(--ink-3); }
+
+/* ── Risk–coverage ── */
+.rc, .hm, .fvl { margin: 2.5rem 0; }
+.rc-plot, .hm-plot, .fvl-plot { width: 100%; height: auto; display: block; }
+.rc-grid { stroke: var(--ink-3); stroke-opacity: 0.25; stroke-width: 1; }
+.rc-tick { fill: var(--ink-3); font-size: 12px; font-family: var(--font-sans); }
+.rc-line { fill: none; stroke-width: 2; }
+.rc-model { stroke: var(--red); color: var(--red); fill: var(--red); }
+.rc-base { stroke: var(--ink); color: var(--ink); fill: var(--ink); }
+.rc-rand { stroke: var(--ink-3); color: var(--ink-3); fill: var(--ink-3); stroke-dasharray: 4 4; }
+.rc-oracle { stroke: var(--ink-3); color: var(--ink-3); fill: var(--ink-3); stroke-dasharray: 1 4; stroke-linecap: round; }
+.rc-line.rc-model, .rc-line.rc-base, .rc-line.rc-rand, .rc-line.rc-oracle { fill: none; }
+.rc-cursor { stroke: var(--ink); stroke-opacity: 0.4; stroke-width: 1; }
+.rc-slider { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.6rem; }
+.rc-slider input { flex: 1; max-width: 22rem; accent-color: var(--red); min-height: 1.5rem; }
+.rc-out { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.4rem 1.2rem; margin: 0.8rem 0 0; }
+.rc-out dt { font-size: 0.82rem; font-style: italic; fill: none; }
+.rc-out dd { margin: 0; font-size: 1.15rem; color: var(--ink); }
+.rc-note { margin-top: 0.8rem; font-size: 0.85em; color: var(--ink-3); }
+
+/* ── Bias heatmap ── */
+.hm-plot { max-width: 30rem; }
+.hm-lab { fill: var(--ink-3); font-size: 11px; font-family: var(--font-mono, monospace); }
+.hm-col { cursor: pointer; }
+.hm-col.is-harsh { fill: var(--red); font-weight: 700; }
+.hm-col.is-on { text-decoration: underline; }
+.hm-cell { cursor: crosshair; transition: fill-opacity 150ms; }
+.hm-cell.is-hover { stroke: var(--ink); stroke-width: 1.5; }
+.hm-diag { fill: none; stroke: var(--ink-3); stroke-opacity: 0.25; }
+.hm-read { min-height: 3em; margin-top: 0.6rem; font-size: 0.9rem; color: var(--ink-2, var(--ink)); }
+
+/* ── Fit vs law ── */
+.fvl-forbidden { fill: var(--red); fill-opacity: 0.06; }
+.fvl-axis { stroke: var(--ink-3); stroke-width: 1; }
+.fvl-a { fill: none; stroke: var(--ink); stroke-width: 2; }
+.fvl-b { fill: none; stroke: var(--ink-3); stroke-width: 2; stroke-dasharray: 6 4; transition: stroke 300ms; }
+.fvl-b.is-caught { stroke: var(--red); }
+.fvl-dot { fill: var(--paper); stroke: var(--ink); stroke-width: 1.3; }
+.fvl-stamp circle { fill: none; stroke: var(--red); stroke-width: 2; }
+.fvl-stamp text { fill: var(--red); font-family: var(--font-sans); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+.fvl-stamp { animation: stamp 260ms cubic-bezier(0.3, 1.6, 0.5, 1); transform-box: fill-box; transform-origin: center; }
+@keyframes stamp { from { opacity: 0; transform: scale(1.6) rotate(-6deg); } }
+.fvl-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; margin-top: 0.6rem; font-size: 0.92rem; }
+.fvl-key { display: inline-block; width: 1.4rem; height: 0; margin-right: 0.35rem; vertical-align: middle; border-top: 2px solid var(--ink); }
+.fvl-key-b { border-top: 2px dashed var(--ink-3); }
+.fvl-btn { margin-left: auto; min-height: 2.25rem; padding: 0 0.9rem; font: inherit; color: var(--paper); background: var(--ink); border: 0; cursor: pointer; }
+.fvl-btn[aria-pressed="true"] { background: var(--red); }
+
+/* ── Margin glossary ── */
+.prose-sheet { position: relative; }
+.gloss { border-bottom: 1px dotted var(--ink-3); cursor: help; }
+.gloss:hover, .gloss:focus-visible { border-bottom-color: var(--red); outline: none; }
+.gloss-def { display: none; position: absolute; z-index: 5; font-family: var(--font-sans); font-size: 0.8rem; line-height: 1.45; font-style: normal; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--ink-2, var(--ink)); background: var(--paper); border-left: 2px solid var(--red); padding: 0.15rem 0 0.15rem 0.7rem; }
+.gloss:hover .gloss-def, .gloss:focus .gloss-def { display: block; }
+@media (min-width: 1024px) { .gloss-def { left: calc(100% + var(--gap-r, 2.5rem)); width: var(--margin, 14rem); margin-top: -1.3em; } }
+@media (max-width: 1023.98px) { .gloss-def { left: 0; right: 0; margin-top: 0.3rem; padding: 0.5rem 0.7rem; box-shadow: 0 2px 10px color-mix(in srgb, var(--ink) 12%, transparent); } }
+
+/* ── Print: a note printed comes out as a journal page ── */
+@media print {
+  @page { size: letter; margin: 2cm 2.2cm; }
+  :root { --paper: #fff; --paper-2: #fff; --ink: #000; --ink-2: #222; --ink-3: #555; --red: #8a1f0e; }
+  html, body { background: #fff !important; color: #000; font-size: 10.5pt; line-height: 1.45; }
+  body > header, body > footer, nav, .skip-link, .palette-backdrop, .egg, .reading-toggle, .poem-skip,
+  .fc, .fl, .rc, .hm, .fvl, .plate-controls, .pencil-note, .gloss-def, .scribble, .ford, button { display: none !important; }
+  .ink-settle, .draw [data-draw] { animation: none !important; stroke-dashoffset: 0 !important; }
+  .sheet, .sheet-row { display: block !important; max-width: none !important; padding: 0 !important; }
+  .col-rail, .col-margin { display: none !important; }
+  .col-text, .col-sheet, .col-wide { width: auto !important; max-width: none !important; margin: 0 !important; }
+  h1 { font-size: 18pt; line-height: 1.15; margin-bottom: 4pt; }
+  h2 { font-size: 12pt; margin-top: 14pt; page-break-after: avoid; break-after: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .theorem, .proof, figure, .katex-display, table { break-inside: avoid; }
+  .prose-sheet a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; word-break: break-all; }
+  .gloss { border: 0; }
+  /* Sidenotes become footnotes, set in place below the paragraph that cites them. */
+  .sidenote { display: block !important; float: none !important; width: auto !important; margin: 4pt 0 8pt !important; padding: 3pt 0 0 !important; border: 0 !important; border-top: 0.5pt solid #999 !important; font-size: 8.5pt; color: #222; }
+  .sidenote::before { content: counter(sidenote) ". "; color: #000; font-size: 8pt; }
+  label.sn-ref::after { border: 0 !important; }
+  .fig-raster { mix-blend-mode: normal !important; filter: none !important; }
+  .revisions { font-size: 8.5pt; }
+}
+
+/* ── Appendix toys ── */
+.egg-btn { min-height: 2.25rem; padding: 0 0.85rem; font: inherit; font-size: 0.9rem; font-style: italic; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-3); cursor: pointer; }
+.egg-btn:hover { border-color: var(--red); color: var(--red); }
+.egg-win { margin-top: 1rem; font-family: var(--ff-hand), cursive; font-size: 1.6rem; color: var(--red); }
+.egg-slider { display: flex; align-items: center; gap: 0.7rem; font-size: 0.9rem; }
+.egg-slider input { flex: 1; accent-color: var(--red); min-height: 1.5rem; }
+.egg-slider > span:first-child { width: 8.5rem; }
+.set-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin-top: 1rem; font-size: 0.9rem; color: var(--ink-3); }
+
+.cello { display: grid; grid-template-columns: minmax(0, 15rem) 1fr; gap: 2rem; align-items: start; }
+@media (max-width: 600px) { .cello { grid-template-columns: 1fr; } .cello-board { max-width: 13rem; margin: 0 auto; } }
+.cello-board { width: 100%; height: auto; touch-action: none; user-select: none; }
+.cello-wood { fill: #2a2118; }
+.cello-nut { stroke: #e9e1cf; stroke-width: 5; }
+.cello-tape { stroke: #e9e1cf; stroke-opacity: 0.18; stroke-width: 1.5; }
+.cello-string { stroke: #cfc3a8; stroke-linecap: round; transition: stroke 120ms; }
+.cello-string.is-on { stroke: #fff4d8; filter: drop-shadow(0 0 3px #ffd98a); }
+.cello-hit { stroke: transparent; stroke-width: 26; cursor: pointer; }
+.cello-label { fill: var(--ink-3); font-size: 14px; font-style: italic; font-family: var(--font-serif); }
+.cello-finger { fill: var(--red); fill-opacity: 0.85; pointer-events: none; }
+.cello-note { font-size: 2.6rem; font-style: italic; line-height: 1; margin-bottom: 1rem; min-height: 1em; }
+
+.set-table { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: 0.6rem; transition: transform 120ms; }
+.set-table.is-no { animation: set-shake 300ms; }
+@keyframes set-shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.set-card { padding: 0.5rem; background: var(--paper); border: 1px solid var(--ink-3); border-radius: 8px; cursor: pointer; transition: transform 120ms, border-color 120ms, box-shadow 120ms; }
+@media (prefers-color-scheme: dark) { .set-card { background: #efe9dc; } }
+.set-card:hover { transform: translateY(-2px); }
+.set-card.is-sel { border-color: var(--red); box-shadow: 0 0 0 2px var(--red); }
+.set-card.is-hint { box-shadow: 0 0 0 2px var(--ink-3); }
+.set-card svg { width: 100%; height: auto; display: block; }
+
+.lo-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; max-width: 20rem; }
+.lo-cell { aspect-ratio: 1; border: 1px solid var(--ink-3); background: var(--paper); cursor: pointer; border-radius: 4px; transition: background 150ms, box-shadow 150ms; }
+.lo-cell.is-on { background: var(--red); border-color: var(--red); box-shadow: 0 0 12px color-mix(in srgb, var(--red) 45%, transparent); }
+.lo-cell.is-hint { outline: 2px dashed var(--ink); outline-offset: 2px; }
+
+.harmono { display: grid; grid-template-columns: minmax(0, 26rem) 1fr; gap: 2rem; align-items: center; }
+@media (max-width: 700px) { .harmono { grid-template-columns: 1fr; } }
+.harmono-plot { width: 100%; height: auto; }
+.harmono-path { fill: none; stroke: var(--ink); stroke-width: 0.6; stroke-opacity: 0.85; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw-stroke 4s ease-out forwards; }
+.harmono-ctl { display: grid; gap: 0.8rem; }
+
+.buffon-plot { width: 100%; height: auto; border: 1px solid var(--ink-3); }
+.buffon-line { stroke: var(--ink-3); stroke-width: 1; }
+.buffon-needle { stroke: var(--ink); stroke-width: 1.2; stroke-opacity: 0.6; }
+.buffon-needle.is-hit { stroke: var(--red); stroke-opacity: 0.9; }
+
+@media (prefers-reduced-motion: reduce) { .harmono-path { animation: none; stroke-dashoffset: 0; } .set-table.is-no { animation: none; } }

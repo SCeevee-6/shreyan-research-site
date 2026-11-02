@@ -9,12 +9,20 @@ import { useEffect, useRef, useState } from "react";
 export function PoemStage({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [reading, setReading] = useState(false);
+  const [typing, setTyping] = useState(false);
 
   useEffect(() => {
     if (location.hash !== "#typed" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const poem = ref.current?.querySelector(".poem");
-    poem?.classList.add("typing");
+    if (!poem) return;
+    poem.classList.add("typing");
     history.replaceState(null, "", location.pathname);
+    setTyping(true);
+    const lines = poem.querySelectorAll<HTMLElement>(".line");
+    const last = lines[lines.length - 1];
+    const done = () => setTyping(false);
+    last?.addEventListener("animationend", done);
+    return () => last?.removeEventListener("animationend", done);
   }, []);
 
   useEffect(() => {
@@ -30,6 +38,18 @@ export function PoemStage({ children }: { children: React.ReactNode }) {
   return (
     <div ref={ref} className="poem-stage">
       {children}
+      {typing && (
+        <button
+          type="button"
+          className="poem-skip label link-quiet"
+          onClick={() => {
+            ref.current?.querySelector(".poem")?.classList.remove("typing");
+            setTyping(false);
+          }}
+        >
+          skip ›
+        </button>
+      )}
       <button type="button" className="reading-toggle label link-quiet" aria-pressed={reading} onClick={() => setReading((r) => !r)}>
         {reading ? "Leave reading mode" : "Reading mode"}
       </button>
