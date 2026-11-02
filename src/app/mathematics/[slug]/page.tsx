@@ -55,6 +55,18 @@ export default async function MathNote({ params }: Props) {
         <div className="col-text prose-sheet" data-numbered>
           <MDX source={entry.body} />
         </div>
+        {entry.data.revisions?.length ? (
+          <section aria-label="Revisions" className="sheet-row mt-14">
+            <h2 className="col-rail label label-muted">Revisions</h2>
+            <ol className="col-text revisions">
+              {entry.data.revisions.map((r, i) => (
+                <li key={i}>
+                  <span className="tnum text-red">v{i + 1}</span> {r}
+                </li>
+              ))}
+            </ol>
+          </section>
+        ) : null}
       </div>
       <nav aria-label="Other notes" className="sheet mt-20">
         <div className="col-sheet grid grid-cols-2 gap-6 border-t border-hair pt-5">

@@ -27,7 +27,8 @@ export function IntersectionDiagram({ s = 2, t = 2, fusion = true, title, classN
   const k = [1];
   for (let i = 1; i <= 3; i++) k.push((k[i - 1] * b[i - 1]) / c[i]);
   const n = k.reduce((x, y) => x + y, 0);
-  const r = k.map((v) => 30 + 11 * Math.sqrt(v));
+  // Logarithmic radii, so orders up to (4, 4) still fit on the plate.
+  const r = k.map((v) => 22 + 11 * Math.log2(1 + v));
   const x = [110, 370, 630, 890];
   const srg = s === t ? [n, k[1] + k[2], s ** 3 + s ** 2 + s - 1, (s + 1) * (s ** 2 + 1)] : null;
   title ??=
@@ -105,7 +106,7 @@ export function IntersectionDiagram({ s = 2, t = 2, fusion = true, title, classN
           </g>
         ))}
         {fusion && srg && (
-          <g>
+          <g className="fuse-snap" key={`f${s}`}>
             <path
               d={`M ${x[1] - r[1]} 232 v 12 H ${x[2] + r[2]} v -12`}
               className="fig-red"

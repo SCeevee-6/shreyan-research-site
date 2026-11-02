@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FordCircles } from "@/components/figures/FordCircles";
 
 export const metadata = { title: "Erratum" };
 
@@ -12,10 +13,18 @@ export default function NotFound() {
             For this page, <span className="italic">read</span> another.
           </h1>
           <p className="mt-6 text-lede italic text-ink-2">
-            The page you asked for is not on this site. It may have been moved or renamed.
+            The page you asked for is not on this site. While you’re here: hover the gaps between the circles.
           </p>
-          <p className="mt-10">
+        </div>
+        <div className="col-sheet mt-10">
+          <FordCircles />
+        </div>
+        <div className="col-text mt-8">
+          <p>
             <Link href="/">Return to the cover</Link> and its table of contents.
+          </p>
+          <p className="mt-6 text-note text-ink-3" title="404 = 2² · 101 is not a prime power, and Bruck–Ryser doesn't rule it out.">
+            No projective plane of order 404 is known.
           </p>
         </div>
       </div>

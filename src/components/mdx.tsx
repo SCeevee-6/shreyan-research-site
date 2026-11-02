@@ -8,10 +8,12 @@ import { BeadChain } from "./figures/BeadChain";
 import { Doily } from "./figures/Doily";
 import { OrbitRings } from "./figures/OrbitRings";
 import { FusionCheck } from "./figures/FusionCheck";
+import { FusionLattice } from "./figures/FusionLattice";
+import { Pencil } from "./Pencil";
 import { Plot } from "./figures/Plot";
 
 type Kind = "theorem" | "lemma" | "proposition" | "corollary" | "definition" | "remark";
-type EnvProps = { n?: number | string; name?: string; children: React.ReactNode };
+type EnvProps = { n?: number | string; name?: string; pencil?: string; children: React.ReactNode };
 
 function makeComponents() {
   // Per-document counter so each sidenote's toggle has a stable, unique id.
@@ -34,11 +36,11 @@ function makeComponents() {
   }
 
   const env = (kind: Kind) =>
-    function Env({ n, name, children }: EnvProps) {
+    function Env({ n, name, pencil, children }: EnvProps) {
       return (
         <div className="theorem" data-kind={kind}>
           <p className="theorem-head">
-            {kind} {n}
+            {pencil ? <Pencil note={pencil}>{`${kind} ${n}`}</Pencil> : <>{kind} {n}</>}
             {name && <span className="theorem-name"> ({name})</span>}
           </p>
           <div className="theorem-body">{children}</div>
@@ -92,6 +94,8 @@ function makeComponents() {
     Doily,
     OrbitRings,
     FusionCheck,
+    FusionLattice,
+    Pencil,
     Plot,
   };
 }

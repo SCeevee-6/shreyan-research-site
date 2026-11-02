@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/issue";
 import { MDX } from "@/components/mdx";
 import { Poem, firstLine, lineCount } from "@/components/Poem";
 import { EntryHead, Meta } from "@/components/PageHead";
+import { PoemStage } from "@/components/PoemStage";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -58,7 +59,9 @@ export default async function WritingEntry({ params }: Props) {
           {poem ? (
             <>
               <div className="col-text">
-                <Poem text={body} />
+                <PoemStage>
+                  <Poem text={body} />
+                </PoemStage>
                 {data.date && <p className="mt-12 label label-muted">— {formatDate(data.date)}</p>}
               </div>
               {data.note && <p className="col-margin text-note italic text-ink-2 lg:pt-2">{data.note}</p>}

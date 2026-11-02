@@ -644,3 +644,91 @@ body::after {
 .fc-out dd { margin: 0; }
 .fc-srg { display: block; color: var(--red); }
 .fc-note { margin-top: 0.9rem; font-size: 0.85em; color: var(--ink-3); }
+
+/* ── Plate sliders ── */
+.plate-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.6rem; margin-top: 0.75rem; font-size: 0.95rem; }
+.plate-slider { display: inline-flex; align-items: center; gap: 0.55rem; }
+.plate-slider input { width: 7rem; accent-color: var(--red); min-height: 1.5rem; }
+.plate-verdict { font-family: var(--ff-hand), cursive; font-size: 1.35rem; color: var(--ink-3); transition: color 200ms; }
+.plate-verdict.is-fused { color: var(--red); }
+.fuse-snap { transform-box: view-box; transform-origin: 50% 80%; animation: fuse-snap 420ms cubic-bezier(0.3, 1.6, 0.5, 1); }
+@keyframes fuse-snap { from { opacity: 0; transform: translateY(14px) scaleY(0.6); } }
+
+/* ── Fusion explorer ── */
+.fl { margin: 2.5rem 0; padding: 1.1rem 1.2rem; border: 1px solid var(--ink-3); border-left: 3px solid var(--red); background: var(--paper-2); }
+.fl-hint { font-size: 0.85em; color: var(--ink-3); font-style: italic; }
+.fl-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.8rem 0; }
+.fl-chip { display: inline-flex; align-items: baseline; gap: 0.15rem; min-height: 2.5rem; padding: 0.35rem 0.7rem; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-3); border-bottom-width: 3px; cursor: pointer; }
+.fl-chip[data-block="0"] { border-bottom-color: var(--ink); }
+.fl-chip[data-block="1"] { border-bottom-color: var(--red); }
+.fl-chip[data-block="2"] { border-bottom-color: var(--ink-3); border-bottom-style: dashed; }
+.fl-chip[data-block="3"] { border-bottom-color: var(--red); border-bottom-style: dotted; }
+.fl-k { margin-left: 0.4rem; font-size: 0.8em; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.fl-block { margin-left: 0.5rem; font-family: var(--ff-hand), cursive; font-size: 1.2em; color: var(--red); }
+.fl-verdict { font-size: 0.95em; }
+.fl-verdict.is-ok { color: #3f7a4a; }
+.fl-verdict.is-bad { color: var(--red); }
+@media (prefers-color-scheme: dark) { .fl-verdict.is-ok { color: #8cc296; } }
+
+/* ── Ford circles (404) ── */
+.ford { width: 100%; height: auto; overflow: hidden; }
+.ford-c circle { fill: none; stroke: var(--ink); stroke-width: 1; animation: ford-drop 500ms cubic-bezier(0.3, 1.4, 0.5, 1); transform-box: fill-box; transform-origin: 50% 100%; }
+.ford-c text { fill: var(--ink-3); font-family: var(--font-serif); font-style: italic; }
+.ford-gap { fill: transparent; cursor: crosshair; }
+@keyframes ford-drop { from { opacity: 0; transform: translateY(-40px) scale(0.6); } }
+
+/* ── Red pencil ── */
+.pencil { position: relative; display: inline-block; }
+.pencil-ring { position: absolute; left: -0.55em; top: -0.45em; width: calc(100% + 1.1em); height: calc(100% + 0.9em); overflow: visible; pointer-events: none; }
+.pencil-ring path { fill: none; stroke: var(--red); stroke-width: 1.6; stroke-linecap: round; vector-effect: non-scaling-stroke; opacity: 0.85; }
+.pencil-note { position: absolute; left: calc(100% + 1rem); top: -1.1em; white-space: nowrap; font-family: var(--ff-hand), cursive; font-size: 1.3rem; font-style: normal; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--red); pointer-events: none; transition: opacity 600ms 700ms; }
+.pencil.draw[data-state="ready"] .pencil-note { opacity: 0; }
+@media (max-width: 1023px) { .pencil-note { display: none; } }
+
+/* ── Revisions ── */
+.revisions { font-size: 0.92rem; }
+.revisions li + li { margin-top: 0.35rem; }
+
+/* ── Practice log ── */
+.practice-grid { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 4px; }
+.practice-week { display: grid; grid-template-rows: repeat(7, 12px); gap: 5px; }
+.practice-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--ink); justify-self: center; align-self: center; }
+.practice-dot[data-l="0"] { background: none; box-shadow: inset 0 0 0 1px var(--ink-3); width: 5px; height: 5px; opacity: 0.5; }
+.practice-dot[data-l="1"] { width: 5px; height: 5px; opacity: 0.55; }
+.practice-dot[data-l="2"] { width: 7px; height: 7px; opacity: 0.7; }
+.practice-dot[data-l="3"] { width: 9px; height: 9px; opacity: 0.85; }
+.practice-dot[data-l="4"] { width: 11px; height: 11px; }
+.practice-key { display: flex; align-items: center; gap: 6px; margin-top: 0.9rem; font-size: 0.82rem; color: var(--ink-3); }
+
+/* ── Poems: typewriter and reading mode ── */
+.poem.typing .line { clip-path: inset(0 100% 0 0); animation: type-line var(--dur) steps(var(--n)) var(--at) forwards; }
+@keyframes type-line { to { clip-path: inset(0 0 0 0); } }
+.reading-toggle { margin-top: 3rem; display: inline-block; background: none; border: 0; padding: 0; cursor: pointer; min-height: 1.5rem; }
+:root[data-reading] body > header, :root[data-reading] body > footer, :root[data-reading] article > :not(:has(.poem-stage)), :root[data-reading] .col-margin { display: none; }
+:root[data-reading] main { padding-top: 14vh; }
+
+/* ── Page transitions and the travelling § ── */
+.ink-settle { animation: ink-settle 120ms ease-out; }
+@keyframes ink-settle { from { opacity: 0; } }
+.sect-mark { position: absolute; left: 0; top: 0; transition: transform 380ms cubic-bezier(0.6, 0, 0.2, 1); pointer-events: none; }
+
+/* ── Command palette ── */
+.palette-backdrop { position: fixed; inset: 0; z-index: 70; background: color-mix(in srgb, var(--paper) 70%, transparent); backdrop-filter: blur(2px); display: flex; justify-content: center; align-items: flex-start; padding: 16vh 16px 0; }
+.palette { width: min(34rem, 100%); background: var(--paper); border: 1px solid var(--ink); box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 12%, transparent); }
+.palette-input { width: 100%; padding: 0.9rem 1rem; font: inherit; font-size: 1.15rem; font-style: italic; background: transparent; color: var(--ink); border: 0; border-bottom: 1px solid var(--ink-3); outline: none; }
+.palette-list { max-height: 50vh; overflow-y: auto; padding: 0.3rem 0; }
+.palette-list button { display: flex; width: 100%; justify-content: space-between; gap: 1rem; padding: 0.55rem 1rem; font: inherit; text-align: left; background: none; border: 0; color: var(--ink); cursor: pointer; }
+.palette-list [aria-selected="true"] button { background: var(--paper-2); }
+.palette-list [aria-selected="true"] button > span:first-child { color: var(--red); }
+.palette-empty { padding: 0.7rem 1rem; color: var(--ink-3); }
+.palette-tex { min-height: 5rem; padding: 0.5rem 1rem 1rem; overflow-x: auto; }
+.kbd { font-family: var(--font-mono, monospace); font-size: 0.85em; padding: 0 0.35em; border: 1px solid var(--ink-3); border-radius: 3px; }
+
+/* ── Eggs ── */
+.egg { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 65; max-width: calc(100vw - 3rem); font-family: var(--ff-hand), cursive; font-size: 1.5rem; color: var(--red); transform: rotate(-3deg); animation: egg-in 300ms ease-out; pointer-events: none; }
+@keyframes egg-in { from { opacity: 0; transform: rotate(-3deg) translateY(8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fuse-snap, .ford-c circle, .ink-settle, .egg { animation: none; }
+  .sect-mark { transition: none; }
+}

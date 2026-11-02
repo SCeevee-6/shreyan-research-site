@@ -44,6 +44,8 @@ export type MathMeta = {
   topics: string[];
   status: string; // e.g. "Proved (draft manuscript)", "Computation", "Negative results"
   links?: Link[];
+  /** Lab-notebook revision log, oldest first. Shown as v1, v2, … at the foot of the note. */
+  revisions?: string[];
 };
 
 export type WritingMeta = {

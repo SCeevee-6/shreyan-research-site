@@ -5,6 +5,11 @@ import { hand, mono, sans, serif } from "@/lib/fonts";
 import { site } from "@/site.config";
 import { RunningHead } from "@/components/RunningHead";
 import { Colophon } from "@/components/Colophon";
+import { PageFade } from "@/components/PageFade";
+import { CommandPalette, type PaletteItem } from "@/components/CommandPalette";
+import { Eggs } from "@/components/Eggs";
+import { sections } from "@/site.config";
+import { getCollection } from "@/lib/content";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -33,16 +38,34 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+async function paletteItems(): Promise<PaletteItem[]> {
+  const [research, maths, writing] = await Promise.all([
+    getCollection("research"),
+    getCollection("mathematics"),
+    getCollection("writing"),
+  ]);
+  return [
+    { label: "Cover", href: "/", group: "Page" },
+    ...sections.map((s) => ({ label: s.title, href: `/${s.slug}`, group: `§${s.n}` })),
+    ...research.map((r) => ({ label: r.data.title, href: `/research/${r.slug}`, group: "Research" })),
+    ...maths.map((m) => ({ label: `Note ${m.data.n}: ${m.data.title}`, href: `/mathematics/${m.slug}`, group: "Mathematics" })),
+    ...writing.map((w) => ({ label: w.data.title, href: `/writing/${w.slug}`, group: "Writing" })),
+  ];
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const items = await paletteItems();
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} ${hand.variable}`}>
       <body>
         <a href="#main" className="skip-link">Skip to text</a>
         <RunningHead />
         <main id="main" tabIndex={-1} className="focus:outline-none">
-          {children}
+          <PageFade>{children}</PageFade>
         </main>
         <Colophon />
+        <CommandPalette items={items} />
+        <Eggs />
       </body>
     </html>
   );

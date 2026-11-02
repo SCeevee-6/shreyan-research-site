@@ -51,7 +51,7 @@ export default async function Writing() {
               <li key={p.slug} className="sheet-row group pt-6 lg:pt-7">
                 {p.data.date && <p className="col-rail label label-muted tnum pt-2.5">{formatMonth(p.data.date)}</p>}
                 <div className="col-text">
-                  <Link href={`/writing/${p.slug}`} className="block no-underline">
+                  <Link href={`/writing/${p.slug}#typed`} className="block no-underline">
                     <span className="block text-[1.5rem] leading-[1.3] italic transition-colors group-hover:text-red sm:text-[1.75rem]">
                       {firstLine(p.body)}
                     </span>

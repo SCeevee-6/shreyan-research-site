@@ -7,7 +7,7 @@ import { Status } from "@/components/Status";
 import { publications } from "@/data/publications";
 import { distinctions } from "@/data/achievements";
 import { instrument } from "@/data/music";
-import { IntersectionDiagram } from "@/components/figures/IntersectionDiagram";
+import { PlatePlay } from "@/components/figures/PlatePlay";
 import { Rule } from "@/components/Rule";
 import { Scribble } from "@/components/Scribble";
 import { Doily } from "@/components/figures/Doily";
@@ -131,10 +131,9 @@ export default async function Cover() {
       {/* ── Plate ── */}
       <div className="sheet mt-14 lg:mt-20">
         <figure className="sheet-row">
-          {/* The link takes its name from the figure's own title, so name and visible text agree. */}
-          <Link href={noteHref} className="col-sheet block no-underline">
-            <IntersectionDiagram s={2} t={2} id="plate" />
-          </Link>
+          <div className="col-sheet">
+            <PlatePlay />
+          </div>
           <span className="col-rail label mt-4">
             Plate I
             <Scribble arrow="curl" className="mt-4 hidden lg:flex" tilt={-6}>
@@ -142,8 +141,8 @@ export default async function Cover() {
             </Scribble>
           </span>
           <figcaption className="col-text text-note text-ink-2 mt-1 lg:mt-4">
-            The point graph of a generalized hexagon of order (2, 2), seen from one point: 1, 6, 24 and 32 points at
-            distance 0, 1, 2 and 3, with the edge counts between layers. Merging distances 1 and 2 — in red — gives a
+            The point graph of a generalized hexagon of order (s, t), seen from one point: the points at distance
+            0, 1, 2 and 3, with the edge counts between layers. Move the sliders. Merging distances 1 and 2 — in red — gives a
             strongly regular graph, which by Theorem B happens exactly when s = t.{" "}
             <Link href={noteHref}>From §4, Note 1</Link>.
           </figcaption>

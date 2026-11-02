@@ -3,6 +3,7 @@ import { ensembles, inStudy, instrument } from "@/data/music";
 import { site } from "@/site.config";
 import { PageHead } from "@/components/PageHead";
 import { Rule } from "@/components/Rule";
+import { PracticeLog } from "@/components/PracticeLog";
 
 export const metadata: Metadata = {
   title: "Music",
@@ -42,6 +43,18 @@ export default function Music() {
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="practice" className="sheet mt-24 lg:mt-32">
+        <h2 id="practice" className="col-rail label">
+          Practice
+        </h2>
+        <Rule heavy className="mt-3" />
+        <div className="sheet-row pt-6">
+          <div className="col-sheet">
+            <PracticeLog />
           </div>
         </div>
       </section>
