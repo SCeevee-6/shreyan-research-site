@@ -613,3 +613,34 @@
   .doily .doily-line, .orbit-ring, .orbit-spoke { animation: none; }
   .doily-walker { transition: none; }
 }
+
+/* Paper grain: a fixed, faint fractal-noise sheet over everything, like uncoated stock. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  body::after { mix-blend-mode: screen; opacity: 0.05; filter: invert(1); }
+}
+@media print { body::after { display: none; } }
+
+/* Fusion calculator */
+.fc { margin: 2.5rem 0; padding: 1.1rem 1.2rem 1rem; border: 1px solid var(--ink-3); border-left: 3px solid var(--red); background: var(--paper-2); font-variant-numeric: tabular-nums; }
+.fc-inputs { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: end; margin-bottom: 1rem; }
+.fc-field { display: flex; flex-direction: column; gap: 0.3rem; border: 0; padding: 0; margin: 0; }
+.fc-field input { width: 5rem; min-height: 2.25rem; padding: 0.2rem 0.5rem; font: inherit; background: var(--paper); color: var(--ink); border: 1px solid var(--ink-3); }
+.fc-toggle { display: flex; }
+.fc-toggle button { min-height: 2.25rem; padding: 0 0.7rem; font: inherit; font-style: italic; border: 1px solid var(--ink-3); background: var(--paper); color: var(--ink-3); cursor: pointer; }
+.fc-toggle button + button { border-left: 0; }
+.fc-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--paper); font-style: normal; }
+.fc-out { display: grid; grid-template-columns: max-content 1fr; gap: 0.35rem 1.2rem; margin: 0; }
+.fc-out dt { font-style: italic; color: var(--ink-3); }
+.fc-out dd { margin: 0; }
+.fc-srg { display: block; color: var(--red); }
+.fc-note { margin-top: 0.9rem; font-size: 0.85em; color: var(--ink-3); }

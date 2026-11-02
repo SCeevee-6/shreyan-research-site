@@ -7,6 +7,7 @@ import { IntersectionDiagram } from "./figures/IntersectionDiagram";
 import { BeadChain } from "./figures/BeadChain";
 import { Doily } from "./figures/Doily";
 import { OrbitRings } from "./figures/OrbitRings";
+import { FusionCheck } from "./figures/FusionCheck";
 import { Plot } from "./figures/Plot";
 
 type Kind = "theorem" | "lemma" | "proposition" | "corollary" | "definition" | "remark";
@@ -90,6 +91,7 @@ function makeComponents() {
     BeadChain,
     Doily,
     OrbitRings,
+    FusionCheck,
     Plot,
   };
 }
