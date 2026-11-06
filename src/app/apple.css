@@ -153,10 +153,11 @@ label.sn-ref { cursor: pointer; }
 .fvl-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .egg-btn:hover, .fl-chip:hover, .fc-toggle button:hover { background: color-mix(in srgb, var(--ink) 14%, transparent); color: var(--ink); }
 button:active:not(:disabled) { transform: scale(0.97); }
-.fl-chip { border-bottom: 3px solid transparent !important; border-radius: var(--radius-s); background: var(--paper); }
-.fl-chip[data-block="1"] { border-bottom-color: var(--red) !important; }
-.fl-chip[data-block="2"] { border-bottom-color: var(--ink-3) !important; }
-.fl-chip[data-block="3"] { border-bottom-color: var(--ink) !important; }
+.fl-chip { border: 0 !important; border-radius: var(--radius-s); background: var(--paper); }
+/* Block membership reads from the chip's fill: one tint per block, no accent borders. */
+.fl-chip[data-block="1"] { background: color-mix(in srgb, var(--red) 16%, var(--paper)); }
+.fl-chip[data-block="2"] { background: color-mix(in srgb, var(--ink) 10%, var(--paper)); }
+.fl-chip[data-block="3"] { background: color-mix(in srgb, var(--ink) 22%, var(--paper)); }
 .fl-block, .plate-verdict, .egg-win { font-family: var(--ff-ui); font-weight: 600; font-size: 1rem; }
 .fc-field input { border-radius: var(--radius-s); border: 1px solid var(--hair); font-family: var(--ff-ui); }
 input[type="range"] { accent-color: var(--red); }
