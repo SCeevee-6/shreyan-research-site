@@ -1,27 +1,17 @@
-# Proof Sheet — design system
+# Clean — design system
 
-High-contrast editorial print, set in a heavy academic monospace. Replaces "The Annotated Margin"
-(kept for reference in `DESIGN-annotated-margin-v1.md`; its grid and margin structure survive).
+Apple-style: white and `#f5f5f7` surfaces, one face (Inter, optically sized), a single blue for
+everything interactive. Supersedes the Proof Sheet mono world and "The Annotated Margin"
+(`DESIGN-annotated-margin-v1.md`). Styles live in `src/app/apple.css`, loaded after `globals.css`.
 
-## Voice
-- **Structure is mono.** JetBrains Mono (`--ff-display`) for every heading, label, numeral, control
-  and piece of data. Headings 700, the cover name and section numerals 800, tracking −0.04em.
-- **Reading is serif.** Newsreader stays for prose, poems, captions and statements — long text is
-  never set in mono.
-- **Hand** (Caveat) only for red-pencil marks.
-- Labels are sentence case, untracked, 12px mono. No uppercase eyebrows; no kicker above a heading.
-
-## Colour
-Paper `#f5f3ee` / ink `#0b0b0a` (dark: `#0c0c0b` / `#f3f0e9`). One accent, proofreader's red
-`#c42d16` (dark `#ff5b3d`), for marks only: §, the full stop on the cover, selection, focus, hover.
-
-## Structure
-- 4px spacing scale. Rules are printed: 3px ink for section breaks, 1px hairline inside.
-- Rail / text / margin grid from v1. Nothing centred; the concert programme is flush left.
-- Interactive panels: hairline box with a 3px ink top rule. No coloured side stripes, no offset shadows.
-
-## Motion
-- `--ease-out: cubic-bezier(0.23, 1, 0.32, 1)`, 160ms for hover and colour; buttons press to 0.97.
-- Page entry: 180ms ink-settle from 40% opacity. Strokes draw in once.
-- Cover: a WebGL halftone screen (15° angle, as in print) whose dots follow a slow noise field and
-  swell under an eased cursor. Paused off-screen; one still frame under reduced motion.
+- **Type:** Inter for UI and reading; tracking tightens with size (−0.045em at the hero, −0.022em in
+  body). Poems keep Newsreader; mathematics keeps KaTeX. Labels are sentence case, never tracked caps.
+- **Colour:** ink `#1d1d1f`, secondary `#6e6e73`, hairline `#d2d2d7`, accent `#0071e3` (dark:
+  black, `#f5f5f7`, `#a1a1a6`, `#424245`, `#2997ff`). The old `--red` token now carries the blue.
+- **Layout:** one reading column (43.25rem) with a wider band for figures; no side rails.
+- **Cover:** centred hero, pill buttons, then a 2-up grid of 28px-radius tiles, each built around a
+  live figure; one dark tile for contrast; a two-column index at the end.
+- **Chrome:** a 48px translucent nav bar (`backdrop-filter: saturate(180%) blur(20px)`) that the page
+  scrolls under; solid under `prefers-reduced-transparency`.
+- **Motion:** press feedback on pointer-down (scale 0.97, 100ms); `cubic-bezier(0.23,1,0.32,1)`
+  ease-out for colour; the palette materialises (scale + blur); 220ms page fade.

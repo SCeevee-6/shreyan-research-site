@@ -1,4 +1,4 @@
-import { Caveat, IBM_Plex_Mono, Instrument_Sans, JetBrains_Mono, Newsreader } from "next/font/google";
+import { Caveat, IBM_Plex_Mono, Instrument_Sans, Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 
 export const serif = Newsreader({
   subsets: ["latin"],
@@ -37,3 +37,6 @@ export const display = JetBrains_Mono({
   variable: "--ff-display",
   display: "swap",
 });
+
+/** The one UI and reading face, optically sized. */
+export const inter = Inter({ subsets: ["latin"], axes: ["opsz"], variable: "--ff-inter", display: "swap" });

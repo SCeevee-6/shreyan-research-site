@@ -193,48 +193,24 @@
   }
   .skip-link:focus { top: 0.75rem; color: var(--paper); }
 
-  /* ── The sheet grid ── */
+  /* ── The sheet grid: one reading column, a wider band for figures ── */
   .sheet {
     display: grid;
     grid-template-columns:
       [full-start] minmax(var(--gutter), 1fr)
-      [rail-start] var(--rail) [rail-end]
-      var(--gap-l)
-      [text-start] minmax(0, var(--measure)) [text-end]
-      var(--gap-r)
-      [margin-start] var(--margin) [margin-end]
+      [wide-start] minmax(0, 9rem)
+      [text-start] minmax(0, 43.25rem) [text-end]
+      minmax(0, 9rem) [wide-end]
       minmax(var(--gutter), 1fr) [full-end];
     align-items: start;
   }
   .sheet > *, .sheet-row > * { grid-column: text; min-width: 0; }
-  .sheet-row {
-    grid-column: full;
-    display: grid;
-    grid-template-columns: subgrid;
-    align-items: start;
-  }
-  .col-rail { grid-column: rail !important; }
-  .col-text { grid-column: text !important; }
-  .col-margin { grid-column: margin !important; }
-  .col-wide { grid-column: text-start / margin-end !important; }
-  .col-sheet { grid-column: rail-start / margin-end !important; }
+  .sheet-row { grid-column: full; display: grid; grid-template-columns: subgrid; align-items: start; }
+  .col-rail, .col-text, .col-margin { grid-column: text !important; }
+  .col-wide, .col-sheet, .col-lead { grid-column: wide !important; }
   .col-full { grid-column: full !important; }
-  .col-lead { grid-column: rail-start / text-end !important; }
-
-  /* Below the desktop sheet, rail and margin fold into the text column. */
-  @media (max-width: 1023.98px) {
-    .col-rail, .col-margin, .col-wide, .col-sheet, .col-lead { grid-column: text !important; }
-    .sheet { grid-template-columns: [full-start] var(--gutter) [rail-start text-start margin-start] minmax(0, 1fr) [rail-end text-end margin-end] var(--gutter) [full-end]; }
-    .sheet-row > .col-margin {
-      border-left: 1px solid var(--red);
-      padding-left: 0.875rem;
-      margin-top: 1rem;
-    }
-    .sheet-row > .col-rail { margin-bottom: 0.5rem; }
-  }
-  @media (min-width: 640px) and (max-width: 1023.98px) {
-    .sheet { grid-template-columns: [full-start] minmax(var(--gutter), 1fr) [rail-start text-start margin-start] minmax(0, 42rem) [rail-end text-end margin-end] minmax(var(--gutter), 1fr) [full-end]; }
-  }
+  .sheet-row > .col-rail { margin-bottom: 0.5rem; }
+  .sheet-row > .col-margin { margin-top: 0.75rem; }
 
   /* Dot leaders for contents rows */
   .leaders {

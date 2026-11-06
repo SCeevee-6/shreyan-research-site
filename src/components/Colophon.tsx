@@ -9,8 +9,7 @@ export function Colophon() {
         <div>
           <p className="label">Colophon</p>
           <p className="mt-3 max-w-[30rem] text-note text-ink-2">
-            Set in Newsreader and Instrument Sans, with catalogue numerals in IBM Plex Mono and mathematics
-            typeset by KaTeX. Built with Next.js. This site sets no cookies, runs no analytics and loads nothing
+            Set in Inter, with poems in Newsreader and mathematics typeset by KaTeX. Built with Next.js. This site sets no cookies, runs no analytics and loads nothing
             from third parties.
           </p>
         </div>
