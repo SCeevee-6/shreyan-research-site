@@ -19,15 +19,15 @@ export function PageHead({
   return (
     <div className="sheet pt-14 sm:pt-20 lg:pt-24">
       <div className="sheet-row">
-        <p className="col-rail leading-[0.8] font-light text-[3.25rem] lg:text-[5.75rem] tracking-[-0.03em] tnum" aria-hidden>
-          <span className="sect">§</span>
-          {s.n}
-        </p>
-        <div className="col-text">
-          <p className="label label-muted mt-1 lg:mt-0">
-            Section {s.n} <span className="px-1">/</span> {s.gloss}
+        <div className="col-rail page-numeral">
+          <p className="tnum" aria-hidden>
+            <span className="sect">§</span>
+            {s.n}
           </p>
-          <h1 className={`mt-3 text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.02] tracking-[-0.02em] ${italic ? "italic" : ""}`}>
+          <p className="label label-muted mt-3">{s.gloss}</p>
+        </div>
+        <div className="col-text">
+          <h1 className={`page-title ${italic ? "is-italic" : ""}`}>
             {title ?? s.title}
           </h1>
           {standfirst && <div className="mt-6 text-lede text-ink-2 italic max-w-[34rem]">{standfirst}</div>}
@@ -63,12 +63,10 @@ export function EntryHead({
             <span className="sect">§</span>
             {s.n} {s.title}
           </Link>
+          {kicker && <span className="block label-muted mt-2">{kicker}</span>}
         </p>
         <div className="col-text">
-          {kicker && <p className="label label-muted">{kicker}</p>}
-          <h1
-            className={`mt-3 text-[clamp(2.125rem,4.6vw,3.5rem)] leading-[1.05] tracking-[-0.015em] ${italicTitle ? "italic" : ""}`}
-          >
+          <h1 className={`entry-title ${italicTitle ? "is-italic" : ""}`}>
             {title}
           </h1>
           {subtitle && <div className="mt-5 text-lede text-ink-2">{subtitle}</div>}

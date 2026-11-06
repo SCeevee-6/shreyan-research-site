@@ -1,4 +1,4 @@
-import { Caveat, IBM_Plex_Mono, Instrument_Sans, Newsreader } from "next/font/google";
+import { Caveat, IBM_Plex_Mono, Instrument_Sans, JetBrains_Mono, Newsreader } from "next/font/google";
 
 export const serif = Newsreader({
   subsets: ["latin"],
@@ -27,5 +27,13 @@ export const hand = Caveat({
   subsets: ["latin"],
   weight: ["500", "600"],
   variable: "--ff-hand",
+  display: "swap",
+});
+
+/** The structural voice: headings, apparatus, data. Heavy weights carry the display. */
+export const display = JetBrains_Mono({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--ff-display",
   display: "swap",
 });

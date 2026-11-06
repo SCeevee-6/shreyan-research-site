@@ -37,7 +37,6 @@ export function PoemStage({ children }: { children: React.ReactNode }) {
 
   return (
     <div ref={ref} className="poem-stage">
-      {children}
       {typing && (
         <button
           type="button"
@@ -50,6 +49,7 @@ export function PoemStage({ children }: { children: React.ReactNode }) {
           skip ›
         </button>
       )}
+      {children}
       <button type="button" className="reading-toggle label link-quiet" aria-pressed={reading} onClick={() => setReading((r) => !r)}>
         {reading ? "Leave reading mode" : "Reading mode"}
       </button>

@@ -8,6 +8,7 @@ import { publications } from "@/data/publications";
 import { distinctions } from "@/data/achievements";
 import { instrument } from "@/data/music";
 import { PlatePlay } from "@/components/figures/PlatePlay";
+import { HalftoneField } from "@/components/HalftoneField";
 import { Rule } from "@/components/Rule";
 import { Scribble } from "@/components/Scribble";
 import { Doily } from "@/components/figures/Doily";
@@ -71,25 +72,25 @@ export default async function Cover() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
 
       {/* ── Masthead ── */}
-      <div className="sheet pt-10 sm:pt-14 lg:pt-16">
-        <div className="col-sheet flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 label label-muted">
-          <span>{site.location}</span>
-          <span className="hidden sm:inline">Research · Mathematics · Writing · Music</span>
-          <span>Updated {updated()}</span>
+      <div className="masthead">
+        <HalftoneField />
+        <div className="sheet relative pt-8 sm:pt-12">
+          <div className="col-sheet masthead-line">
+            <span>{site.location}</span>
+            <span className="hidden sm:inline">research / mathematics / writing / music</span>
+            <span>updated {updated()}</span>
+          </div>
+          <h1 className="col-sheet masthead-name">
+            <span className="block">{site.givenName}</span>
+            <span className="block masthead-family">{site.familyName}<span className="text-red">.</span></span>
+          </h1>
         </div>
-        <h1 className="col-sheet mt-6 sm:mt-8 font-light leading-[0.84] tracking-[-0.035em] text-[clamp(4rem,20vw,11.75rem)]">
-          <span className="block">{site.givenName}</span>
-          <span className="block italic font-normal tracking-[-0.03em] pl-[0.55em] lg:pl-[calc(var(--rail)+var(--gap-l))]">
-            {site.familyName}
-          </span>
-        </h1>
       </div>
 
       {/* ── Statement ── */}
       <div className="sheet mt-10 lg:mt-14">
         <div className="sheet-row">
-          <p className="col-rail label label-muted pt-2 hidden lg:block">A notebook</p>
-          <p className="col-text text-lede sm:text-[1.5rem] sm:leading-[1.4]">
+          <p className="col-text masthead-statement">
             I&rsquo;m a student in Allen, Texas. This is where I keep my research in algebraic combinatorics and
             computational biology, my math notes, my writing, and some music.
           </p>
@@ -214,7 +215,7 @@ export default async function Cover() {
                   </span>
                   <span className="col-text flex items-baseline gap-3">
                     <span className="label text-ink-3 lg:hidden w-5 shrink-0">{s.n}</span>
-                    <span className="text-[1.625rem] sm:text-[2.125rem] leading-[1.1] tracking-[-0.01em] group-hover:text-red transition-colors">
+                    <span className="toc-title group-hover:text-red">
                       {s.title}
                     </span>
                     <span className="leaders group-hover:border-ink" />

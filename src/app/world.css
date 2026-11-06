@@ -1,0 +1,142 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   PROOF SHEET — high-contrast editorial print, heavy academic monospace.
+   Loaded after globals.css; it replaces the old world's tokens and voice.
+   Serif (Newsreader) is kept only for reading text: prose, poems, captions.
+   Everything structural — headings, apparatus, data, controls — is JetBrains Mono.
+   Spacing sits on a 4px scale. One accent, proofreader's red, for marks only.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --paper: #f5f3ee;
+  --paper-2: #ebe8e0;
+  --ink: #0b0b0a;
+  --ink-2: #2a2926;
+  --ink-3: #5b5953;
+  --hair: rgb(11 11 10 / 0.16);
+  --hair-strong: rgb(11 11 10 / 0.5);
+  --red: #c42d16;
+  --ff-struct: var(--ff-display), ui-monospace, "SF Mono", Menlo, monospace;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --t: 160ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0c0c0b;
+    --paper-2: #161614;
+    --ink: #f3f0e9;
+    --ink-2: #cfcbc2;
+    --ink-3: #9a958b;
+    --hair: rgb(243 240 233 / 0.16);
+    --hair-strong: rgb(243 240 233 / 0.5);
+    --red: #ff5b3d;
+  }
+}
+
+/* ── Browser surfaces ── */
+::selection { background: var(--red); color: var(--paper); }
+html { caret-color: var(--red); scrollbar-color: var(--ink-3) var(--paper); scrollbar-width: thin; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* ── Apparatus: labels, meta, navigation — mono, sentence case, never tracked caps ── */
+.label, .meta dt, .masthead-line {
+  font-family: var(--ff-struct);
+  font-size: 0.75rem;
+  line-height: 1.33;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 500;
+}
+.meta dd { font-family: var(--ff-struct); font-size: 0.8125rem; line-height: 1.5; color: var(--ink); }
+.smallcaps { font-variant-caps: normal; letter-spacing: 0; font-family: var(--ff-struct); font-size: 0.8125rem; }
+.sect { color: var(--red); font-weight: 700; }
+
+/* ── Headings: heavy mono, tight, sentence case ── */
+main h1, main h2:not(.label), main h3:not(.label), .toc-title, .page-title, .entry-title {
+  font-family: var(--ff-struct);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-style: normal;
+  text-wrap: balance;
+}
+main h1.italic, main h2.italic, main h3.italic, .is-italic { font-style: italic; font-weight: 600; }
+.page-title { margin-top: 0; font-size: clamp(2.5rem, 6.4vw, 5rem); line-height: 0.96; }
+.entry-title { margin-top: 0; font-size: clamp(2rem, 4.8vw, 3.5rem); line-height: 1; }
+.toc-title { font-size: clamp(1.5rem, 3.2vw, 2.25rem); line-height: 1; transition: color var(--t) var(--ease-out); }
+.prose-sheet h2 { font-size: 1.5rem; line-height: 1.12; margin-top: 3rem; }
+.prose-sheet h3 { font-size: 1.125rem; line-height: 1.2; }
+.prose-sheet h2::before { font-family: var(--ff-struct); font-weight: 700; color: var(--red); }
+
+/* Section numeral in the rail: a heavy figure, the one big number on the page. */
+.page-numeral > p:first-child { font-family: var(--ff-struct); font-weight: 800; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.8; letter-spacing: -0.06em; }
+.page-numeral .label { max-width: 9rem; }
+
+/* ── Rules: printed, not drawn ── */
+.border-ink { border-color: var(--ink); }
+.border-t-2 { border-top-width: 3px; }
+.leaders { border-bottom: 1px dotted var(--ink-3); }
+
+/* ── Links: underline offset, quick ink change ── */
+a { text-underline-offset: 0.18em; text-decoration-thickness: 1px; transition: color var(--t) var(--ease-out), text-decoration-color var(--t) var(--ease-out); }
+a:hover { text-decoration-thickness: 2px; }
+
+/* ── Cover ── */
+.masthead { position: relative; isolation: isolate; padding-bottom: 3rem; border-bottom: 3px solid var(--ink); }
+.halftone { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; color: var(--ink); opacity: 0.16; pointer-events: none; }
+@media (prefers-color-scheme: dark) { .halftone { opacity: 0.22; } }
+.masthead-line { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; color: var(--ink-2); padding-bottom: 12px; border-bottom: 1px solid var(--ink); }
+.masthead-name { margin-top: 48px; font-family: var(--ff-struct); font-weight: 800; font-size: clamp(3.25rem, 12.5vw, 6rem); line-height: 0.9; letter-spacing: -0.04em; }
+.masthead-family { padding-left: 1.5ch; }
+@media (min-width: 1024px) { .masthead-name { margin-top: 96px; } .masthead-family { padding-left: calc(var(--rail) + var(--gap-l)); } }
+.masthead-statement { font-size: 1.375rem; line-height: 1.45; }
+@media (min-width: 640px) { .masthead-statement { font-size: 1.625rem; line-height: 1.38; } }
+
+/* ── No centred blocks: the programme is set flush left like everything else ── */
+.programme { text-align: left; }
+.programme .composer { font-family: var(--ff-struct); font-variant-caps: normal; letter-spacing: 0; font-weight: 700; font-size: 1rem; }
+.programme .mx-auto { margin-left: 0; }
+.programme .part::before { display: none; }
+
+/* ── Interactive panels: hairline box with a printed top rule; no coloured side stripe ── */
+.fc, .fl { border: 1px solid var(--hair-strong); border-top: 3px solid var(--ink); background: transparent; padding: 16px 20px; }
+.fc-field input, .fc-toggle button, .fl-chip, .egg-btn, .fvl-btn, .lo-cell, .set-card { border-radius: 0; font-family: var(--ff-struct); }
+.fc-toggle button, .fl-chip, .egg-btn, .fvl-btn { font-style: normal; font-size: 0.8125rem; }
+.fc-out dt, .fl-hint, .rc-out dt { font-family: var(--ff-struct); font-style: normal; font-size: 0.75rem; }
+.fc-out dd, .rc-out dd, .tnum { font-variant-numeric: tabular-nums; }
+.rc-out dd, .fc-out dd { font-family: var(--ff-struct); }
+.rc-tick, .hm-lab, .fvl-stamp text { font-family: var(--ff-struct); }
+
+/* ── Controls: press feedback and a sprung release ── */
+button, .egg-btn, .fl-chip, .set-card, .lo-cell { transition: transform 160ms var(--ease-out), background-color var(--t) var(--ease-out), color var(--t) var(--ease-out), border-color var(--t) var(--ease-out); }
+button:active:not(:disabled) { transform: scale(0.97); }
+.egg-btn:hover, .fl-chip:hover { border-color: var(--ink); color: var(--ink); background: var(--paper-2); }
+input[type="range"] { accent-color: var(--ink); }
+input[type="range"]:hover { accent-color: var(--red); }
+
+/* ── Palette: a printed slip, not a floating card ── */
+.palette { border: 2px solid var(--ink); box-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.28); }
+.palette-backdrop { backdrop-filter: none; background: color-mix(in srgb, var(--paper) 82%, transparent); }
+.palette-input { font-family: var(--ff-struct); font-style: normal; font-size: 1rem; }
+.palette-list button > span:first-child { font-family: var(--ff-struct); font-size: 0.875rem; }
+
+/* ── Glossary note: mono, hairline, no stripe ── */
+.gloss-def { font-family: var(--ff-struct); font-size: 0.75rem; border-left: 1px solid var(--red); }
+
+/* ── Poem skip: rides at the top of the screen while the poem types ── */
+.poem-skip { position: sticky; top: 16px; float: right; z-index: 2; padding: 4px 8px; background: var(--paper); border: 1px solid var(--ink); color: var(--ink); cursor: pointer; }
+
+/* ── Page entry: a short ink-settle, ease-out from visible ── */
+.ink-settle { animation: ink-settle 180ms var(--ease-out); }
+@keyframes ink-settle { from { opacity: 0.4; transform: translateY(4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-settle { animation: none; }
+  button:active:not(:disabled) { transform: none; }
+}
+@media print {
+  .halftone { display: none; }
+  .masthead { border-bottom-width: 1px; }
+}
+
+/* Running head: the name in the house mono, set like a journal's running title. */
+body > header .sheet a[href="/"], body > header > div a[href="/"] { font-family: var(--ff-struct); font-style: normal; font-weight: 700; font-size: 0.9375rem; letter-spacing: -0.02em; }

@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "katex/dist/katex.min.css";
 import "./globals.css";
-import { hand, mono, sans, serif } from "@/lib/fonts";
+import "./world.css";
+import { display, hand, mono, sans, serif } from "@/lib/fonts";
 import { site } from "@/site.config";
 import { RunningHead } from "@/components/RunningHead";
 import { Colophon } from "@/components/Colophon";
@@ -59,7 +60,7 @@ async function paletteItems(): Promise<PaletteItem[]> {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const items = await paletteItems();
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} ${hand.variable}`}>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} ${hand.variable} ${display.variable}`}>
       <body>
         <a href="#main" className="skip-link">Skip to text</a>
         <RunningHead />
